@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/tools/index",
+    "pages/tools/who_is_leader/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "智能小工具",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

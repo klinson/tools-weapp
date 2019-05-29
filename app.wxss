@@ -1,0 +1,141 @@
+@import 'assets/styles/weui.wxss';
+
+page {
+  background-color: #f8f8f8;
+  font-size: 16px;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+  padding-bottom:55px; /*自定义底部按钮遮挡到内容*/
+}
+
+.page__hd {
+  padding: 40px;
+}
+
+.page__bd {
+  /* padding-bottom: 40px; */
+}
+
+.page__bd_spacing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.page__ft {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.page__title {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.page__desc {
+  margin-top: 5px;
+  color: #888;
+  text-align: left;
+  font-size: 14px;
+}
+
+/* 列表系列  */
+
+.list-item-img-box {
+  position: relative;
+}
+
+.list-item-img {
+  display: block;
+  width: 100%;
+  margin-bottom: 10rpx;
+}
+
+.list-item-img-info-1 {
+  position: absolute;
+  top: 15rpx;
+  right: 15rpx;
+  background-color: rgba(8, 8, 8, 0.7);
+  color: #f8f8f8;
+  padding: 0 10rpx;
+}
+
+.list-item-img-info-2 {
+  position: absolute;
+  top: 75rpx;
+  right: 15rpx;
+  background-color: rgba(8, 8, 8, 0.7);
+  color: #f8f8f8;
+  padding: 0 10rpx;
+}
+
+.list-item-title {
+  margin-bottom: 10rpx;
+  font-size: 40rpx;
+}
+
+.list-item-desc {
+  margin-bottom: 10rpx;
+  color: #888;
+  font-size: 35rpx;
+}
+
+.list-item-bottom-desc {
+  margin-bottom: 10rpx;
+  color: #888;
+  font-size: 25rpx;
+}
+
+.list-item-info {
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+.list-item-info-icon {
+  display: block;
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 10rpx;
+  float: left;
+}
+
+.list-item-info-right-icon {
+  display: block;
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 10rpx;
+  float: right;
+}
+
+.list-item-info-content {
+  font-size: 30rpx;
+}
+
+.list-icon {
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 5px;
+  display: block;
+}
+
+.imageDown {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 0rpx;
+}
+
+.areaSelected {
+  text-align: center;
+  padding: 20rpx 0;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 40rpx;
+}
+
+.black-color {
+  color: black;
+}
+
+.weui-select_in-select-after {
+  overflow: hidden;
+}
