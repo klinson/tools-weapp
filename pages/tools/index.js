@@ -4,6 +4,9 @@ const app = getApp()
 
 Page({
   data: {
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    topNavBar: app.globalData.topNavBar,
     list: [
       {
         id: 'random',
@@ -11,12 +14,27 @@ Page({
         open: false,
         pages: [
           {
+            icon: 'shopfill',
+            color: 'red',
             root_path: 'who_is_leader',
-            title: '谁是班委'
+            title: '群体抽奖'
+          },
+          {
+            icon: 'send',
+            color: 'red',
+            root_path: 'individual_draw',
+            title: '个体抽奖'
           }
-        ]
+        ],
       }
     ]
+  },
+
+  bindToolTap: function (e) {
+    let path = e.currentTarget.dataset.path;
+    wx.navigateTo({
+      url: path,
+    })
   },
 
   kindToggle: function (e) {

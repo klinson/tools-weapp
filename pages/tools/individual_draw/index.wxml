@@ -1,6 +1,6 @@
 <cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content">群体抽奖</view>
+  <view slot="content">个体抽奖</view>
 </cu-custom>
 <view class="cu-bar bg-white solid-bottom margin-top">
   <view class="action">
@@ -37,7 +37,7 @@
         <text class="text-grey">{{item.title}}</text>
       </view>
       <view class="action">
-        <text class="text-grey text-sm">{{item.result ? '抽中 '+item.result : '待抽选'}}</text>
+        <text class="text-grey text-sm">{{item.result ? '抽中 '+people[item.result-1] : '待抽选'}}</text>
       </view>
     </view>
   </block>
@@ -46,10 +46,11 @@
   <view class="action">
     <text class="cuIcon-title text-orange "></text> 总人数
   </view>
-  <view class="action">
-    <input class="max_number_input" type='number' placeholder="请输入总人数" value='{{max_number}}' data-input='max_number' bindinput='bindInputChange' disabled="{{all_disabled}}" />
-  </view>
 </view>
+<view class="cu-form-group">
+  <textarea class="weui-textarea" placeholder="请输入待抽人选,支持[,，|/;；、空格]分隔，如“张三，李四，王五”" style="font-size: 1rem" bindinput='bindPeopleChange' />
+</view>
+
 <view class="padding flex flex-direction">
   <button class="cu-btn block bg-green lg shadow" bindtap="bindRandomSelect" disabled='{{all_disabled}}' type="">{{all_disabled ? '抽选中' : '立即抽选'}}</button>
 </view>

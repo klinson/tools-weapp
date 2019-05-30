@@ -1,4 +1,11 @@
 /* pages/tools/who_is_leader/index.wxss */
-.model_input {
-  border-bottom: 1rpx solid #d9d9d9
+.modal_input {
+  border-bottom: 1rpx solid #d9d9d9;
+  font-size: 1rem
+}
+
+.max_number_input {
+  text-align:right;
+  border-bottom: 1rpx solid #d9d9d9;
+  font-size: 1rem
 }

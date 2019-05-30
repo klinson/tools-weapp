@@ -1,8 +1,4 @@
 // pages/tools/who_is_leader/index.js
-wx.cloud.init({
-  env: 'random-78lbw'
-})
-const db = wx.cloud.database()
 const app = getApp()
 Page({
 
@@ -28,29 +24,28 @@ Page({
         result: 0,
       },
     ],
-    max_number: 50,
-    exclude_number: '',
     new_leader: '',
     hiddenModel: 1,
     all_disabled: false,
+    people: [],
+    people_text: '',
 
-    // 保护号码和替死鬼号码
-    protected_number: 0,
-    target_number: 0
   },
 
-  hideModal: function (e) {
-    this.setData({
-      modalName: null
-    })
-  },
-
-  showModal: function (e) {
+  showModal(e) {
     if (this.data.all_disabled) {
       return;
     }
     this.setData({
       modalName: e.currentTarget.dataset.target
+    })
+  },
+
+  bindPeopleChange: function (e) {
+    let people = e.detail.value.split(/[,，|/;；、 ]/)
+    this.setData({
+      people_text: e.detail.value,
+      people: people
     })
   },
 
@@ -60,6 +55,11 @@ Page({
     })
   },
 
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
 
   bindModelConfirm: function () {
     let leaders = this.data.leaders;
@@ -71,7 +71,16 @@ Page({
       leaders: leaders,
       new_leader: '',
       modalName: null
-    }) 
+    })
+  },
+
+  showModal: function (e) {
+    if (this.data.all_disabled) {
+      return;
+    }
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
   },
 
   bindAddleader: function (e) {
@@ -91,7 +100,7 @@ Page({
 
     wx.showModal({
       title: '提示',
-      content: '确认删除奖项【' + leaders[key].title +'】',
+      content: '确认删除奖项【' + leaders[key].title + '】',
       success: function (res) {
         if (res.confirm) {
           leaders.splice(key, 1);
@@ -99,19 +108,22 @@ Page({
             leaders: leaders,
           })
         } else if (res.cancel) {
-          
+
         }
       }
     })
   },
 
-  bindRandomSelect: function() {
+  bindRandomSelect: function () {
     if (this.data.all_disabled) {
+      return;
+    }
+    if (this.data.people.length == 0) {
       return;
     }
 
     let leaders = this.data.leaders;
-    let max = this.data.max_number;
+    let max = this.data.people.length;
     let that = this;
 
     that.setData({
@@ -129,29 +141,31 @@ Page({
         count--;
 
         for (var i = 0, len = leaders.length; i < len; i++) {
-          let res = parseInt(Math.random() * max, 10) + 1;
+          let res = parseInt(Math.random() * max, 10)+1;
 
-          // 最后一次随机的时候，作弊处理，手动替换保护号码
+          // 最后一次随机的时候，作弊处理，手动替换保护
           if (count == 0) {
             // 保护号码和替死鬼号码
-            let protected_number = that.data.protected_number;
-            let target_number = that.data.target_number;
+            let protected1 = '黄宝儿';
+            let protected2 = '宝儿';
 
-            if (protected_number && res == protected_number) {
-              if (max < target_number) {
-                res = max;
+            if (that.data.people[res - 1] == protected1 || that.data.people[res - 1] == protected2) {
+              if (res-1 > 1) {
+                res -= 1;
+              } else if (res + 1 < max){
+                res += 1;
               } else {
-                res = target_number;
+                // 没有得保护了
               }
             }
           }
-          
+
           leaders[i].result = res
         }
         that.setData({
           leaders: leaders,
         })
-       
+
         if (count == 0) {
           clearInterval(that.data.timer);
           that.setData({
@@ -167,19 +181,6 @@ Page({
         }
       }, that.data.random_ms)
     });
-  },
-
-  onShow: function () {
-    let that = this;
-    db.collection('configs').doc('8eaaddb7-8f4d-4a2f-aa07-ca451ce090df').get({
-      success: function (res) {
-        console.log('protected', res.data);
-        that.setData({
-          protected_number: res.data.protected_number,
-          target_number: res.data.target_number
-        })
-      }
-    })
   },
 
   onShareAppMessage: function () {
