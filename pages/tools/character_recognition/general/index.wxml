@@ -28,6 +28,6 @@
 </view>
 <view class='bg-white padding-xl radius shadow-lg' wx:if="{{result.length > 0}}">
   <view class='text-content' wx:for="{{result}}">
-    <view>{{item.words}}</view>
+    <text selectable>{{item.words}}</text>
   </view>
 </view>

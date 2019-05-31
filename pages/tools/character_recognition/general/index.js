@@ -29,17 +29,16 @@ Page({
           success: function (res) {
             if (res.data.data.length == 0) {
               that.setData({
-                result: {
-                  words: '未能识别到文字'
-                },
                 recognize_disabled: true,
               })
+              app.notice.showToast('识别不到文字', 'fail');
             } else {
               that.setData({
                 result: res.data.data,
                 recognize_disabled: true,
                 copy_disabled: false,
               })
+              app.notice.showToast('识别成功', 'success');
             }
           }
         });
