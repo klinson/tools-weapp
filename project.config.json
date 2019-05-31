@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -41,19 +41,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
-					"name": "谁是班委",
-					"pathName": "pages/tools/who_is_leader/index",
+					"name": "通用文字识别",
+					"pathName": "pages/tools/character_recognition/general/index",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "个体抽奖",
-					"pathName": "pages/tools/individual_draw/index",
 					"scene": null
 				}
 			]

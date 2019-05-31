@@ -1,5 +1,11 @@
 //app.js
+const https = require('/utils/https.js');
+const cache = require('/utils/cache.js');
+const notice = require('/utils/notice.js');
 App({
+  https,
+  cache,
+  notice,
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

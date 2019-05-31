@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/tools/index",
-    "pages/tools/who_is_leader/index",
-    "pages/tools/individual_draw/index"
+    "pages/tools/random/who_is_leader/index",
+    "pages/tools/random/individual_draw/index",
+    "pages/tools/character_recognition/general/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

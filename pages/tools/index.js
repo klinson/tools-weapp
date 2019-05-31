@@ -11,7 +11,6 @@ Page({
       {
         id: 'random',
         name: '抽数点号',
-        open: false,
         pages: [
           {
             icon: 'shopfill',
@@ -24,6 +23,18 @@ Page({
             color: 'red',
             root_path: 'individual_draw',
             title: '个体抽奖'
+          }
+        ],
+      },
+      {
+        id: 'character_recognition',
+        name: '文字识别',
+        pages: [
+          {
+            icon: 'scan',
+            color: 'green',
+            root_path: 'general',
+            title: '通用文字识别'
           }
         ],
       }

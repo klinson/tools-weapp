@@ -1,0 +1,33 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">通用文字识别</view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-green "></text> 图片上传
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="ChooseImage" style='margin-right:0.5rem;'>上传</button>
+    <button class="cu-btn bg-green shadow" bindtap="recognize" disabled='{{recognize_disabled}}'>识别</button>
+  </view>
+</view>
+<view class="cu-card case no-card">
+  <view class="cu-item shadow">
+    <view class="image" wx:if="{{img}}">
+      <image src="{{img}}" mode="widthFix" bindtap="ViewImage"></image>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top" wx:if="{{result.length > 0}}">
+  <view class="action">
+    <text class="cuIcon-title text-green "></text> 识别结果
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="copy" disabled='{{copy_disabled}}'>复制</button>
+  </view>
+</view>
+<view class='bg-white padding-xl radius shadow-lg' wx:if="{{result.length > 0}}">
+  <view class='text-content' wx:for="{{result}}">
+    <view>{{item.words}}</view>
+  </view>
+</view>
