@@ -11,7 +11,6 @@ Page({
     topNavBar: app.globalData.topNavBar,
     img: '',
     result: '',
-    recognize_disabled: true,
     copy_disabled: true,
   },
 
@@ -35,7 +34,6 @@ Page({
             } else {
               that.setData({
                 result: res.data.data,
-                recognize_disabled: true,
                 copy_disabled: false,
               })
               app.notice.showToast('识别成功', 'success');
@@ -65,9 +63,10 @@ Page({
       success: (res) => {
         this.setData({
           img: res.tempFilePaths[0],
-          recognize_disabled: false,
           result: [],
           copy_disabled: true,
+        }, () => {
+          this.recognize()
         })
       }
     });

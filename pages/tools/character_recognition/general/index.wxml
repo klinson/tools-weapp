@@ -7,14 +7,14 @@
     <text class="cuIcon-title text-green "></text> 图片上传
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="ChooseImage" style='margin-right:0.5rem;'>上传</button>
-    <button class="cu-btn bg-green shadow" bindtap="recognize" disabled='{{recognize_disabled}}'>识别</button>
+    <button class="cu-btn bg-green shadow" bindtap="ChooseImage">上传</button>
   </view>
 </view>
 <view class="cu-card case no-card">
   <view class="cu-item shadow">
-    <view class="image" wx:if="{{img}}">
-      <image src="{{img}}" mode="widthFix" bindtap="ViewImage"></image>
+    <view class="image">
+      <image wx:if="{{img}}" src="{{img}}" mode="widthFix" bindtap="ViewImage"></image>
+      <image wx:else src="/assets/icons/upload.png" mode='center' bindtap="ChooseImage"></image>
     </view>
   </view>
 </view>
