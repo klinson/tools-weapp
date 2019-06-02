@@ -1,0 +1,33 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">颜值评分</view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-green "></text> 照片上传
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="ChooseImage">上传</button>
+  </view>
+</view>
+<view class="cu-card case no-card">
+  <view class="cu-item shadow">
+    <view class="image">
+      <image wx:if="{{img}}" src="{{img}}" mode="widthFix" bindtap="ViewImage"></image>
+      <image wx:else src="/assets/icons/upload.png" mode='center' bindtap="ChooseImage"></image>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top" wx:if="{{result.length > 0}}">
+  <view class="action">
+    <text class="cuIcon-title text-green "></text> 识别结果
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="copy" disabled='{{copy_disabled}}'>复制</button>
+  </view>
+</view>
+<view class='bg-white padding-xl radius shadow-lg' wx:if="{{result.length > 0}}">
+  <view class='text-content' wx:for="{{result}}">
+    <text selectable>{{item.words}}</text>
+  </view>
+</view>
