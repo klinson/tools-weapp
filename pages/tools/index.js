@@ -7,6 +7,9 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     topNavBar: app.globalData.topNavBar,
+    bottomNavBars: app.globalData.bottomNavBars,
+    bottomNavBarKey: 'tools',
+
     list: [
       {
         id: 'portrait',
@@ -69,6 +72,12 @@ Page({
         ],
       }
     ]
+  },
+
+  NavChange(e) {
+    wx.navigateTo({
+      url: e.currentTarget.dataset.path,
+    })
   },
 
   bindToolTap: function (e) {

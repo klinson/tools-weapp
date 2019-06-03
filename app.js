@@ -52,6 +52,20 @@ App({
     userInfo: null,
     topNavBar: {
       bgColor: 'bg-gradual-blue'
-    }
+    },
+    bottomNavBars: [
+      {
+        key: 'tools',
+        title: '工具',
+        icon: 'tools',
+        path: '/pages/tools/index',
+      },
+      {
+        key: 'user',
+        title: '个人中心',
+        icon: 'about',
+        path: '/pages/user/index',
+      }
+    ],
   }
 })
