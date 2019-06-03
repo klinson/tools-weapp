@@ -15,9 +15,27 @@ Page({
           {
             icon: 'scan',
             color: 'red',
-            root_path: 'score',
+            path: '/pages/tools/portrait/index?type=score',
             title: '颜值评分'
-          }
+          },
+          {
+            icon: 'crown',
+            color: 'red',
+            path: '/pages/tools/portrait/index?type=pk',
+            title: '颜值PK'
+          },
+          {
+            icon: 'friendfill',
+            color: 'red',
+            path: '/pages/tools/portrait/index?type=cp',
+            title: '最佳CP'
+          },
+          {
+            icon: 'sponsor',
+            color: 'red',
+            path: '/pages/tools/portrait/index?type=who_treat',
+            title: '谁请客'
+          },
         ],
       },
       {
@@ -27,7 +45,7 @@ Page({
           {
             icon: 'scan',
             color: 'green',
-            root_path: 'general',
+            path: '/pages/tools/character_recognition/general/index',
             title: '通用文字识别'
           }
         ],
@@ -39,13 +57,13 @@ Page({
           {
             icon: 'shopfill',
             color: 'red',
-            root_path: 'who_is_leader',
+            path: '/pages/tools/random/who_is_leader/index',
             title: '群体抽奖'
           },
           {
             icon: 'send',
             color: 'red',
-            root_path: 'individual_draw',
+            path: '/pages/tools/random/individual_draw/index',
             title: '个体抽奖'
           }
         ],

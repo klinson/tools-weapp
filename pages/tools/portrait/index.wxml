@@ -1,0 +1,20 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{title}}</view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-green "></text> {{upload_title}}
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="ChooseImage">上传</button>
+  </view>
+</view>
+<view class="cu-card case no-card">
+  <view class="cu-item shadow">
+    <view class="image">
+      <image wx:if="{{img}}" src="{{img}}" mode="widthFix" bindtap="ViewImage"></image>
+      <image wx:else src="/assets/icons/upload-avatar.png"  bindtap="ChooseImage"></image>
+    </view>
+  </view>
+</view>

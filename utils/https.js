@@ -2,7 +2,7 @@ const app = getApp();
 const notice = require('./notice.js');
 var server = '';
 // server = 'https://tools.klinson.com';
-server = 'http://192.168.66.2';
+server = 'http://192.168.66.3';
 
 //GET请求
 function GET(requestHandler) {
@@ -36,6 +36,7 @@ function DELETE(requestHandler) {
 function request(method, requestHandler) {
   let params = requestHandler.params;
   let API_URL = server + requestHandler.url;
+  
   wx.showLoading({
     title: '加载中',
   });

@@ -4,7 +4,7 @@
     "pages/tools/random/who_is_leader/index",
     "pages/tools/random/individual_draw/index",
     "pages/tools/character_recognition/general/index",
-    "pages/tools/portrait/score/index"
+    "pages/tools/portrait/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

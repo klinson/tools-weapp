@@ -8,7 +8,7 @@
     </view>
   </view>
   <view class="cu-list grid col-3">
-      <view class="cu-item" wx:for="{{item.pages}}" wx:for-item="page" data-path='/pages/tools/{{item.id}}/{{page.root_path}}/index' bindtap='bindToolTap'>
+      <view class="cu-item" wx:for="{{item.pages}}" wx:for-item="page" data-path='{{page.path}}' bindtap='bindToolTap'>
         <view class="cuIcon-{{page.icon}} text-{{page.color}}">
         </view>
         <text>{{page.title}}</text>
