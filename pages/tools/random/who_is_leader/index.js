@@ -1,7 +1,4 @@
 // pages/tools/who_is_leader/index.js
-wx.cloud.init({
-  env: 'random-78lbw'
-})
 const db = wx.cloud.database()
 const app = getApp()
 Page({

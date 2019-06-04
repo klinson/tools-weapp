@@ -43,6 +43,16 @@
       <text class="text-grey">关于我们</text>
     </navigator>
   </view>
+  <view class="cu-item arrow">
+    <view class="content" bindtap='bindCheckEnv'>
+      <text class="cuIcon-radioboxfill text-blue"></text>
+      <text class="text-grey">小程序状态</text>
+    </view>
+     <view class="action">
+        <view class="cu-tag round bg-yellow" wx:if='{{env != "production"}}'>内测中</view>
+        <view class="cu-tag round bg-green" wx:else>正常</view>
+      </view>
+  </view>
 
   <!-- <view class="cu-item arrow">
     <view class="content">

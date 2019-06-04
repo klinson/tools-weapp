@@ -12,26 +12,14 @@ Page({
 
     is_login: false,
     user_info: null,
+    env: app.globalData.env
+  },
 
-    logined_list: [
-      {
-        key: 'user_info',
-        title: '个人信息',
-        path: '/pages/user/info/index',
-      }
-    ],
-    unlogined_list: [
-      {
-        key: 'about',
-        title: '意见反馈',
-        path: '/pages/about/index',
-      },
-      {
-        key: 'about',
-        title: '关于我们',
-        path: '/pages/about/index',
-      }
-    ],
+  onLoad(options) {
+    this.setData({
+      bottomNavBars: app.globalData.bottomNavBars,
+      env: app.globalData.env
+    });
   },
 
   onShow() {
@@ -41,6 +29,14 @@ Page({
         is_login: true
       });
     }
+  },
+
+  bindCheckEnv() {
+    app.notice.showToast('检测中', 'loading');
+    app.checkEnv((env) => {
+      app.notice.showToast('刷新成功', 'success');
+      this.data.env != env && this.onLoad();
+    });
   },
 
   NavChange(e) {

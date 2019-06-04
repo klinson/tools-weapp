@@ -101,6 +101,12 @@ Page({
     });
   },
 
+  onLoad(options) {
+    this.setData({
+      bottomNavBars: app.globalData.bottomNavBars,
+    });
+  },
+
   onShareAppMessage: function () {
     // return custom share data when user share.
   }

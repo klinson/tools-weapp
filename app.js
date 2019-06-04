@@ -2,16 +2,16 @@
 const https = require('/utils/https.js');
 const cache = require('/utils/cache.js');
 const notice = require('/utils/notice.js');
+wx.cloud.init({
+  env: 'random-78lbw'
+})
 App({
   https,
   cache,
   notice,
   onLaunch: function () {
     let that = this;
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    this.checkEnv()
 
     // 登录
     let user = wx.getStorageSync('user_info');
@@ -36,6 +36,63 @@ App({
         let custom = wx.getMenuButtonBoundingClientRect();
         this.globalData.Custom = custom;
         this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+      }
+    })
+  },
+
+  checkEnv: function (success, error) {
+    let that = this;
+    wx.cloud.database().collection('configs').doc('f1ae76a4-7180-4544-83d6-e176e2e616bb').get({
+      success: function (res) {
+        console.log('env:', res.data.env);
+        that.globalData.env = res.data.env;
+        if (res.data.env != 'production') {
+          that.globalData.bottomNavBars = [
+            {
+              key: 'tools',
+              title: '工具',
+              icon: 'tools',
+              path: '/pages/tools/index',
+            },
+            {
+              key: 'user',
+              title: '个人中心',
+              icon: 'about',
+              path: '/pages/user/index',
+            }
+          ]
+        } else {
+          that.globalData.bottomNavBars = [
+            {
+              key: 'posts',
+              title: '论坛',
+              icon: 'tools',
+              path: '/pages/tools/index',
+            },
+            {
+              key: 'tools',
+              title: '工具',
+              icon: 'tools',
+              path: '/pages/tools/index',
+            },
+            {
+              key: 'user',
+              title: '个人中心',
+              icon: 'about',
+              path: '/pages/user/index',
+            }
+          ]
+        }
+
+        if (success) {
+          success(res.data.env);
+        } else {
+          // 刷新页面
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+        }
+      },
+      error: function(res) {
+        error && error(res);
       }
     })
   },
@@ -101,11 +158,18 @@ App({
     })
   },
   globalData: {
+    env: 'production',
     userInfo: null,
     topNavBar: {
       bgColor: 'bg-gradual-blue'
     },
     bottomNavBars: [
+      {
+        key: 'posts',
+        title: '论坛',
+        icon: 'tools',
+        path: '/pages/tools/index',
+      },
       {
         key: 'tools',
         title: '工具',
