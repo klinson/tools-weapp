@@ -1,8 +1,29 @@
 <cu-custom bgColor="{{topNavBar.bgColor}}">
   <view slot="content">个人中心</view>
 </cu-custom>
+<view class='bg-gradual-blue '>
+</view>
+<view class="padding-tb-xl padding text-center" style="height: 414rpx;">
+  
+  <button wx:if='{{is_login}}' class='{{topNavBar.bgColor}} shadow'>
+    <view class="padding-xl text-while">
+      <view class="cu-avatar xl round" style="background-image:url({{user_info.avatar}});"></view>
+      <view class="padding-xs text-xl">
+        {{user_info.nickname}}
+      </view>
+    </view>
+  </button>
+  <button wx:else open-type='getUserInfo' class='{{topNavBar.bgColor}} shadow' bindgetuserinfo='bindGetUserInfo'>
+    <view class="padding-xl text-while">
+      <view class="cu-avatar xl round" style="background-image:url(/assets/icons/avatar.png);"></view>
+      <view class="padding-xs text-xl">
+        点我登录
+      </view>
+    </view>
+  </button>
+</view>
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view  wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
+  <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
     <view class='cuIcon-cu-image'>
       <image src="/assets/icons/tabbar/{{bottomNavBar.icon}}{{bottomNavBarKey==bottomNavBar.key ? '_cur':''}}.png"></image>
     </view>

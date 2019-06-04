@@ -9,6 +9,18 @@ Page({
     topNavBar: app.globalData.topNavBar,
     bottomNavBars: app.globalData.bottomNavBars,
     bottomNavBarKey: 'user',
+
+    is_login: false,
+    user_info: null,
+  },
+
+  onShow() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        user_info: app.globalData.userInfo,
+        is_login: true
+      });
+    }
   },
 
   NavChange(e) {
@@ -17,7 +29,41 @@ Page({
     })
   },
 
-  onShareAppMessage: function () {
+  bindGetUserInfo: function(e) {
+    let that = this;
+    if (e.detail.userInfo) {
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            app.loginDo({
+              code: res.code,
+              user_info: e.detail.userInfo,
+              success: function (res) {
+                that.setData({
+                  is_login: true,
+                  user_info: res.data.user
+                })
+
+              },
+              error: function (res) {
+                that.setData({
+                  is_login: false,
+                  user_info: null
+                })
+              }
+            })
+          } else {
+            app.notice.showToast('登录失败', 'fail')
+          }
+        }
+      });
+    } else {
+      app.notice.showToast('登录失败', 'fail')
+    };
+  },
+
+  onShareAppMessage: function() {
     // return custom share data when user share.
   }
 })
