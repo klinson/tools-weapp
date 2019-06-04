@@ -4,7 +4,7 @@
 <block wx:for="{{list}}" wx:key="id">
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> {{item.name}}
+      <text class="cuIcon-title text-blue "></text> {{item.name}}
     </view>
   </view>
   <view class="cu-list grid col-3">

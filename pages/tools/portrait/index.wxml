@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="cu-bar bg-white solid-bottom margin-top">
   <view class="action">
-    <text class="cuIcon-title text-green "></text> {{upload_title}}
+    <text class="cuIcon-title text-blue "></text> {{upload_title}}
   </view>
   <view class="action">
     <button class="cu-btn bg-green shadow" bindtap="ChooseImage">上传</button>

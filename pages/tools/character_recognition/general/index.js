@@ -46,7 +46,7 @@ Page({
 
   copy() {
     let content = '';
-    for (let i = 0, len = this.data.result.length; i<len;i++) {
+    for (let i = 0, len = this.data.result.length; i < len; i++) {
       content += this.data.result[i]['words'] + "\n";
     }
     wx.setClipboardData({

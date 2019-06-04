@@ -12,6 +12,26 @@ Page({
 
     is_login: false,
     user_info: null,
+
+    logined_list: [
+      {
+        key: 'user_info',
+        title: '个人信息',
+        path: '/pages/user/info/index',
+      }
+    ],
+    unlogined_list: [
+      {
+        key: 'about',
+        title: '意见反馈',
+        path: '/pages/about/index',
+      },
+      {
+        key: 'about',
+        title: '关于我们',
+        path: '/pages/about/index',
+      }
+    ],
   },
 
   onShow() {

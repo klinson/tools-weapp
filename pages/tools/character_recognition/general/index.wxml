@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="cu-bar bg-white solid-bottom margin-top">
   <view class="action">
-    <text class="cuIcon-title text-green "></text> 图片上传
+    <text class="cuIcon-title text-blue "></text> 图片上传
   </view>
   <view class="action">
     <button class="cu-btn bg-green shadow" bindtap="ChooseImage">上传</button>
@@ -20,7 +20,7 @@
 </view>
 <view class="cu-bar bg-white solid-bottom margin-top" wx:if="{{result.length > 0}}">
   <view class="action">
-    <text class="cuIcon-title text-green "></text> 识别结果
+    <text class="cuIcon-title text-blue "></text> 识别结果
   </view>
   <view class="action">
     <button class="cu-btn bg-green shadow" bindtap="copy" disabled='{{copy_disabled}}'>复制</button>

@@ -1,0 +1,44 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">个人信息</view>
+</cu-custom>
+<form>
+  <view class="cu-form-group margin-top">
+    <view class="title">姓名</view>
+    <input bindinput='bindInputChange' placeholder="请输入姓名" data-input='user_info.name' value='{{user_info.name}}'></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">昵称</view>
+    <input bindinput='bindInputChange' placeholder="请输入昵称" data-input='user_info.nickname' value='{{user_info.nickname}}'></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <picker bindchange="bindSelectArrayChange" value="{{user_info.sex-1}}" range="{{sexs}}" data-input='user_info.sex'>
+      <view class="picker">
+        {{user_info.sex?sexs[user_info.sex-1]:'请选择性别'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">手机号码</view>
+    <input bindinput='bindInputChange' placeholder="请输入手机号码" data-input='user_info.mobile' value='{{user_info.mobile}}'></input>
+  </view>
+  <view class="cu-bar bg-white margin-top">
+    <view class="action">
+      头像上传
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow" bindtap="ChooseImage">上传</button>
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img">
+        <image src='{{user_info.avatar}}' mode='aspectFill' bindtap='ViewImage'></image>
+      </view>
+    </view>
+  </view>
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-blue lg shadow" bindtap="bindSubmitDo">保存</button>
+  </view>
+</form>

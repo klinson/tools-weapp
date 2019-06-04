@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="cu-bar bg-white solid-bottom margin-top">
   <view class="action">
-    <text class="cuIcon-title text-orange "></text> 奖项
+    <text class="cuIcon-title text-blue "></text> 奖项
   </view>
   <view class="action">
     <button class="cu-btn bg-green shadow" bindtap="bindAddleader" data-target="menuModal">添加</button>
@@ -44,7 +44,7 @@
 </view>
 <view class="cu-bar bg-white solid-bottom margin-top">
   <view class="action">
-    <text class="cuIcon-title text-orange "></text> 总人数
+    <text class="cuIcon-title text-blue "></text> 总人数
   </view>
 </view>
 <view class="cu-form-group">

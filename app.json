@@ -5,7 +5,9 @@
     "pages/tools/random/individual_draw/index",
     "pages/tools/character_recognition/general/index",
     "pages/tools/portrait/index",
-    "pages/user/index"
+    "pages/user/index",
+    "pages/user/info/index",
+    "pages/about/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

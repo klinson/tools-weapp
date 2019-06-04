@@ -4,7 +4,6 @@
 <view class='bg-gradual-blue '>
 </view>
 <view class="padding-tb-xl padding text-center" style="height: 414rpx;">
-  
   <button wx:if='{{is_login}}' class='{{topNavBar.bgColor}} shadow'>
     <view class="padding-xl text-while">
       <view class="cu-avatar xl round" style="background-image:url({{user_info.avatar}});"></view>
@@ -22,6 +21,55 @@
     </view>
   </button>
 </view>
+
+<view class="cu-list menu card-menu">
+  <block wx:if='{{is_login}}'>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/user/info/index" open-type="navigate">
+        <text class="cuIcon-wenzi text-blue"></text>
+        <text class="text-grey">个人信息</text>
+      </navigator>
+    </view>
+  </block>
+  <view class="cu-item arrow">
+    <button class="cu-btn content" open-type="contact">
+      <text class="cuIcon-community text-blue"></text>
+      <text class="text-grey">意见反馈</text>
+    </button>
+  </view>
+  <view class="cu-item arrow">
+    <navigator class="content" hover-class="none" url="/pages/about/index" open-type="navigate">
+      <text class="cuIcon-info text-blue"></text>
+      <text class="text-grey">关于我们</text>
+    </navigator>
+  </view>
+
+  <!-- <view class="cu-item arrow">
+    <view class="content">
+      <text class="cuIcon-circlefill text-grey"></text>
+      <text class="text-grey">图标 + 标题</text>
+    </view>
+  </view>
+  <view class="cu-item arrow">
+    <view class="content">
+      <image src="/assets/icons/avatar.png" class="png" mode="aspectFit"></image>
+      <text class="text-grey">图片 + 标题</text>
+    </view>
+  </view>
+  <view class="cu-item arrow">
+    <button class="cu-btn content" open-type="contact">
+      <text class="cuIcon-btn text-olive"></text>
+      <text class="text-grey">Open-type 按钮</text>
+    </button>
+  </view>
+  <view class="cu-item arrow">
+    <navigator class="content" hover-class="none" url="../list/list" open-type="navigate">
+      <text class="cuIcon-discoverfill text-orange"></text>
+      <text class="text-grey">Navigator 跳转</text>
+    </navigator>
+  </view> -->
+</view>
+
 <view class="cu-bar tabbar bg-white shadow foot">
   <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
     <view class='cuIcon-cu-image'>

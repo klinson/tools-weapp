@@ -1,8 +1,7 @@
-const app = getApp();
 const notice = require('./notice.js');
 var server = '';
-// server = 'https://tools.klinson.com';
-server = 'http://192.168.66.3';
+server = 'https://tools.klinson.com';
+// server = 'http://192.168.66.3';
 
 //GET请求
 function GET(requestHandler) {
@@ -40,15 +39,15 @@ function request(method, requestHandler) {
   wx.showLoading({
     title: '加载中',
   });
-  let sessionId = wx.getStorageSync('sessionId');
-  console.log(sessionId)
+  let sessionId = wx.getStorageSync('login_token');
+  console.log('login_token', sessionId)
   wx.request({
     url: API_URL,
     data: JSON.stringify(params),
     method: method,
     header: {
       'content-type': 'application/json',
-      Authorization: sessionId,
+      Authorization: 'Bearer ' + sessionId,
     },
     success: function (res) {
       console.log(res);
@@ -63,12 +62,29 @@ function request(method, requestHandler) {
           notice.showModal('', message);
           break;
         case 401:
-          wx.removeStorageSync('sessionId');
-          wx.removeStorageSync('userInfo');
-          notice.showModal('', '用户未登录，或者登录时间过长，请重新进行登录！');
-          wx.switchTab({
-            url: '/pages/school/index/index'
+          wx.removeStorage({
+            key: 'user_info',
           })
+          wx.removeStorage({
+            key: 'login_token',
+          })
+          getApp().globalData.userInfo = null;
+          notice.showModal('', '用户未登录，或者登录时间过长，请重新进行登录！点击确认进行登录', () => {
+            wx.login({
+              success: res => {
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                getApp().loginDo({
+                  code: res.code,
+                  is_try: true,
+                  try_error: function() {
+                    wx.navigateTo({
+                      url: '/pages/user/index',
+                    })
+                  }
+                })
+              }
+            })
+          });
           break;
         case 403:
           notice.showToast('用户无权限', 'fail');
@@ -100,6 +116,17 @@ function request(method, requestHandler) {
     }
   })
 }
+
+function getConfig(key, callback) {
+  GET({
+    url: '/api/configs/' + key,
+    params: {},
+    success: function (res) {
+      callback && callback(res.data.value);
+    }
+  })
+}
+
 // 检测数据是否为空
 function CHECK(data, name) {
   if (!data) {
@@ -110,11 +137,98 @@ function CHECK(data, name) {
   }
 }
 
+// 上传文件
+function uploadImages(object) {
+  let sizeType, sourceType;
+  // 可以指定是原图还是压缩图，默认二者都有
+  switch (object.sizeType) {
+    case 1:
+      sizeType = ['original']
+      break;
+    case 2:
+      sizeType = ['compressed']
+      break;
+    default:
+      sizeType = ['original', 'compressed']
+      break;
+  }
+  // 可以指定来源是相册还是相机，默认二者都有
+  switch (object.sourceType) {
+    case 1:
+      sourceType = ['album']
+      break;
+    case 2:
+      sourceType = ['camera']
+      break;
+    default:
+      sourceType = ['album', 'camera']
+      break;
+  }
+
+  wx.chooseImage({
+    count: object.count || 9, // 默认9
+    sizeType: sizeType, 
+    sourceType: sourceType, 
+    success: function (res) {
+      // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+      var tempFilePaths = res.tempFilePaths;
+      _batchUpload({
+        i: 0,
+        len: tempFilePaths.length,
+        tempFilePaths: tempFilePaths,
+        urls: [],
+        files: [],
+        success_func: object.success,
+        error_func: object.error,
+        complete_func: object.complete,
+      })
+    }
+  })
+}
+// 实现批量上传文件
+function _batchUpload(object) {
+  wx.uploadFile({
+    url: server + '/api/files/uploadImage',
+    filePath: object.tempFilePaths[object.i],
+    name: 'file',
+    formData: {},
+    success: function (res) {
+      let data = JSON.parse(res.data);
+      object.files.push(data);
+      object.urls.push(data.url);
+    },
+    complete: function (res) {
+      object.i = object.i + 1;
+      if (object.i < object.len) {
+        _batchUpload(object)
+      } else {
+        // 上传完毕，判断状态
+        if (object.files.length > 0) {
+          object.success_func && object.success_func({
+            files: object.files,
+            urls: object.urls
+          })
+        } else {
+          notice.showToast('上传失败', 'fail');
+          object.error_func && object.error_func('')
+        }
+
+        object.complete_func && object.complete_func({
+          files: object.files,
+          urls: object.urls
+        })
+      }
+    }
+  })
+}
+
 module.exports = {
   GET: GET,
   POST: POST,
   PUT: PUT,
   DELETE: DELETE,
   CHECK: CHECK,
+  uploadImages: uploadImages,
+  getConfig: getConfig,
   server: server
 }
