@@ -1,0 +1,26 @@
+/* pages/posts/index.wxss */
+
+.float-btn-group {
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.float-btn-group float-btn-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40rpx;
+  border-radius: 100%;
+  overflow: hidden;
+
+  padding: 0px;
+  box-sizing: none;
+  font-size:18px;
+  text-align:center;
+  text-decoration: none;
+  line-height:0;
+}

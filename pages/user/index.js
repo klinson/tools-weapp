@@ -15,6 +15,12 @@ Page({
     env: app.globalData.env
   },
 
+  NavChange(e) {
+    wx.redirectTo({
+      url: e.currentTarget.dataset.path,
+    })
+  },
+
   onLoad(options) {
     this.setData({
       bottomNavBars: app.globalData.bottomNavBars,
@@ -37,12 +43,6 @@ Page({
       app.notice.showToast('刷新成功', 'success');
       this.data.env != env && this.onLoad();
     });
-  },
-
-  NavChange(e) {
-    wx.navigateTo({
-      url: e.currentTarget.dataset.path,
-    })
   },
 
   bindGetUserInfo: function(e) {

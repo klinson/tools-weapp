@@ -66,8 +66,8 @@ App({
             {
               key: 'posts',
               title: '论坛',
-              icon: 'tools',
-              path: '/pages/tools/index',
+              icon: 'posts',
+              path: '/pages/posts/index',
             },
             {
               key: 'tools',
@@ -167,8 +167,8 @@ App({
       {
         key: 'posts',
         title: '论坛',
-        icon: 'tools',
-        path: '/pages/tools/index',
+        icon: 'posts',
+        path: '/pages/posts/index',
       },
       {
         key: 'tools',

@@ -75,7 +75,7 @@ Page({
   },
 
   NavChange(e) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: e.currentTarget.dataset.path,
     })
   },

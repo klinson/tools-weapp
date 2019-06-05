@@ -6,7 +6,10 @@
 <view class="padding-tb-xl padding text-center" style="height: 414rpx;">
   <button wx:if='{{is_login}}' class='{{topNavBar.bgColor}} shadow'>
     <view class="padding-xl text-while">
-      <view class="cu-avatar xl round" style="background-image:url({{user_info.avatar}});"></view>
+      <view class="cu-avatar xl round" style="background-image:url({{user_info.avatar}});">
+        <view class="cu-tag badge bg-blue light" wx:if='{{user_info.sex==1}}'>♂</view>
+        <view class="cu-tag badge bg-pink" wx:else>♀</view>
+      </view>
       <view class="padding-xs text-xl">
         {{user_info.nickname}}
       </view>
@@ -48,10 +51,10 @@
       <text class="cuIcon-radioboxfill text-blue"></text>
       <text class="text-grey">小程序状态</text>
     </view>
-     <view class="action">
-        <view class="cu-tag round bg-yellow" wx:if='{{env != "production"}}'>内测中</view>
-        <view class="cu-tag round bg-green" wx:else>正常</view>
-      </view>
+    <view class="action">
+      <view class="cu-tag round bg-yellow" wx:if='{{env != "production"}}'>内测中</view>
+      <view class="cu-tag round bg-green" wx:else>正常</view>
+    </view>
   </view>
 
   <!-- <view class="cu-item arrow">
@@ -80,11 +83,15 @@
   </view> -->
 </view>
 
+
+<!-- 底部防止被覆盖 -->
+<view style='height: 2.5rem'></view>
+
 <view class="cu-bar tabbar bg-white shadow foot">
   <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
     <view class='cuIcon-cu-image'>
       <image src="/assets/icons/tabbar/{{bottomNavBar.icon}}{{bottomNavBarKey==bottomNavBar.key ? '_cur':''}}.png"></image>
     </view>
-    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-green':'text-gray'}}">{{bottomNavBar.title}}</view>
+    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-blue':'text-gray'}}">{{bottomNavBar.title}}</view>
   </view>
 </view>

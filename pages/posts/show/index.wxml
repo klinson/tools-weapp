@@ -1,0 +1,38 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{info.title}}</view>
+</cu-custom>
+
+<view class="cu-card dynamic 'no-card">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{info.owner.avatar}});">
+          <view class="cu-tag badge bg-blue light" wx:if='{{info.owner.sex==1}}'>♂</view>
+          <view class="cu-tag badge bg-pink" wx:else>♀</view>
+        </view>
+        <view class="content flex-sub">
+          <view>{{info.owner.nickname}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            {{info.created_at}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content" style='max-height:none;'>
+      <view wx:for='{{info.decode_content}}'>{{item}}</view>
+    </view>
+    <view class="grid flex-sub padding-lr col-3 grid-square">
+      <view class="bg-img" style="background-image:url({{item}});" wx:for="{{info.images}}" wx:key="{{index}}" bindtap='ViewImage' data-url='{{item}}'>
+      </view>
+    </view>
+    <view class="text-gray text-sm text-right padding">
+      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
+      <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+    </view>
+  </view>
+</view>
+<view class='flex' wx:if='{{user_info.id == info.user_id}}'>
+  <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindToCreatePage">编辑</button>
+  <button class="flex-sub padding-sm margin-xs cu-btn bg-red lg shadow" bindtap="bindDeleteBtn">删除</button>
+</view>

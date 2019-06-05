@@ -16,11 +16,14 @@
   </view>
 </block>
 
+<!-- 底部防止被覆盖 -->
+<view style='height: 2.5rem'></view>
+
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view  wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
+  <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
     <view class='cuIcon-cu-image'>
       <image src="/assets/icons/tabbar/{{bottomNavBar.icon}}{{bottomNavBarKey==bottomNavBar.key ? '_cur':''}}.png"></image>
     </view>
-    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-green':'text-gray'}}">{{bottomNavBar.title}}</view>
+    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-blue':'text-gray'}}">{{bottomNavBar.title}}</view>
   </view>
 </view>

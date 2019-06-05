@@ -41,22 +41,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 2,
 			"list": [
-				{
-					"id": -1,
-					"name": "通用文字识别",
-					"pathName": "pages/tools/character_recognition/general/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "颜值评分",
-					"pathName": "pages/tools/portrait/score/index",
-					"query": "",
-					"scene": null
-				},
 				{
 					"id": -1,
 					"name": "user",
@@ -66,9 +52,16 @@
 				},
 				{
 					"id": -1,
-					"name": "user_info",
-					"pathName": "pages/user/info/index",
+					"name": "论坛",
+					"pathName": "pages/posts/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "论坛+",
+					"pathName": "pages/posts/form/index",
+					"query": "category_id=0&id=0",
 					"scene": null
 				}
 			]

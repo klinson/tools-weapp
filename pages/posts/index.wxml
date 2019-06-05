@@ -1,0 +1,68 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}">
+  <view slot="content">论坛</view>
+</cu-custom>
+
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
+    <view class='cuIcon-cu-image'>
+      <image src="/assets/icons/tabbar/{{bottomNavBar.icon}}{{bottomNavBarKey==bottomNavBar.key ? '_cur':''}}.png"></image>
+    </view>
+    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-blue':'text-gray'}}">{{bottomNavBar.title}}</view>
+  </view>
+</view>
+
+<view class="cu-bar search bg-white">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="搜索标题关键字" confirm-type="search" value='{{search}}' bindinput='bindInputChange' data-input='search'></input>
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-blue shadow-blur round" bindtap='bindSutmitSearch'>搜索</button>
+  </view>
+</view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="0">
+  <view class="cu-item {{item.id == category_id?'text-blue cur':''}}" wx:for="{{categories}}" wx:key bindtap="bindSelectCategory" data-id="{{item.id}}">
+    {{item.title}}
+  </view>
+</scroll-view>
+
+<view class="cu-card case">
+  <view class="cu-item shadow" wx:for='{{list}}' wx:key bindtap='bindToShowPage' data-id='{{item.id}}'>
+    <view class="image">
+      <image src="{{item.images[0]}}" mode="widthFix"></image>
+      <view class="cu-tag bg-blue">{{item.category.title}}</view>
+      <view class="cu-tag bg-red" style='left: 0;right: auto;' wx:if='{{item.is_top}}'>置顶</view>
+      <view class="cu-bar bg-shadeBottom">
+        <text class="text-cut">{{item.title}}</text>
+      </view>
+    </view>
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{item.owner.avatar}});">
+          <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
+          <view class="cu-tag badge bg-pink" wx:else>♀</view>
+        </view>
+        <view class="content flex-sub">
+          <view class="text-grey">{{item.owner.nickname}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            {{item.created_at}}
+            <view class="text-gray text-sm">
+              <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
+              <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class='float-btn-group'>
+  <button class="cu-btn bg-green button-hover shadow-blur lg float-btn-item" role="button" aria-label="" aria-disabled="false" bindtap='bindToCreatePage'>
+    <text class="cuIcon-post" style='margin-right: 0.2rem'></text> 发布
+  </button>
+</view>
+
+<!-- 底部防止被覆盖 -->
+<view style='height: 2.5rem'></view>

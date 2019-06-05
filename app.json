@@ -7,7 +7,10 @@
     "pages/tools/portrait/index",
     "pages/user/index",
     "pages/user/info/index",
-    "pages/about/index"
+    "pages/about/index",
+    "pages/posts/index",
+    "pages/posts/form/index",
+    "pages/posts/show/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
