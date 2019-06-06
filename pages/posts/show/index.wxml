@@ -36,3 +36,101 @@
   <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindToCreatePage">编辑</button>
   <button class="flex-sub padding-sm margin-xs cu-btn bg-red lg shadow" bindtap="bindDeleteBtn">删除</button>
 </view>
+
+<view class="cu-bar bg-white margin-top">
+  <view class="action border-title">
+    <text class="text-xl text-bold text-blue">评论区</text>
+    <text class="bg-gradual-blue" style="width:3rem"></text>
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="bottomModal">评论</button>
+  </view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" style='text-align:left;'>
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green" bindtap='bindSubmitComment'>确定</view>
+      <view class="action" bindtap="hideModal">取消</view>
+    </view>
+    <view>
+      <form>
+        <view class="cu-bar bg-white margin-top">
+          <view class="action">
+            配图
+          </view>
+          <view class="action">
+            {{comment.images.length}}/9
+          </view>
+        </view>
+        <view class="cu-form-group">
+          <view class="grid col-4 grid-square flex-sub">
+            <view class="bg-img" wx:for="{{comment.images}}" wx:key="{{index}}" bindtap="ViewCommentImage" data-url="{{comment.images[index]}}">
+              <image src='{{comment.images[index]}}' mode='aspectFill'></image>
+              <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                <text class="cuIcon-close"></text>
+              </view>
+            </view>
+            <view class="solids" bindtap="ChooseImage" wx:if="{{comment.images.length<9}}">
+              <text class="cuIcon-cameraadd"></text>
+            </view>
+          </view>
+        </view>
+
+        <view class="cu-bar bg-white margin-top">
+          <view class="action">
+            内容<text class='text-red'>*</text>
+          </view>
+        </view>
+        <view class="cu-form-group">
+          <textarea maxlength="-1" auto-height bindinput="textareaAInput" placeholder="请输入内容" data-input='comment.content' bindinput='bindInputChange' fixed='true' value='{{comment.content}}'></textarea>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>
+<view class="cu-list menu-avatar comment solids-top">
+  <view class="cu-item">
+    <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
+    <view class="content">
+      <view class="text-grey">莫甘娜</view>
+      <view class="text-gray text-content text-df">
+        凯尔，你被自己的光芒变的盲目。
+      </view>
+      <view class="bg-grey padding-sm radius margin-top-sm  text-sm">
+        <view class="flex">
+          <view>凯尔：</view>
+          <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
+        </view>
+      </view>
+      <view class="margin-top-sm flex justify-between">
+        <view class="text-gray text-df">2018年12月4日</view>
+        <view>
+          <text class="cuIcon-appreciatefill text-red"></text>
+          <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+    <view class="content">
+      <view class="text-grey">凯尔</view>
+      <view class="text-gray text-content text-df">
+        妹妹，如果不是为了飞翔，我们要这翅膀有什么用?
+      </view>
+      <view class="bg-grey padding-sm radius margin-top-sm  text-sm">
+        <view class="flex">
+          <view>莫甘娜：</view>
+          <view class="flex-sub">如果不能立足于大地，要这双脚又有何用?</view>
+        </view>
+      </view>
+      <view class="margin-top-sm flex justify-between">
+        <view class="text-gray text-df">2018年12月4日</view>
+        <view>
+          <text class="cuIcon-appreciate text-gray"></text>
+          <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
