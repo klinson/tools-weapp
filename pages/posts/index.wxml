@@ -27,6 +27,8 @@
 </scroll-view>
 
 <view class="cu-card case">
+  <block wx:if='{{list.length > 0}}'>
+
   <view class="cu-item shadow" wx:for='{{list}}' wx:key bindtap='bindToShowPage' data-id='{{item.id}}'>
     <view class="image">
       <image src="{{item.images[0]}}" mode="widthFix"></image>
@@ -47,20 +49,32 @@
           <view class="text-gray text-sm flex justify-between">
             {{item.created_at}}
             <view class="text-gray text-sm">
-              <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-              <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+              <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 10 -->
+              <text class="cuIcon-messagefill margin-lr-xs"></text> {{item.comments_count}}
             </view>
           </view>
         </view>
       </view>
     </view>
   </view>
+  <view wx:if='{{isLastPage}}'>
+      <view class="padding text-center">
+        <text class="text-gray">-- 我是有底线的 --</text>
+      </view>
+    </view>
+  </block>
+  <view wx:else>
+    <view class="padding text-center">
+      <text class="text-gray">-- 快来抢先发布第一贴！ --</text>
+    </view>
+  </view>
+
 </view>
 
 
 <view class='float-btn-group'>
   <button class="cu-btn bg-green button-hover shadow-blur lg float-btn-item" role="button" aria-label="" aria-disabled="false" bindtap='bindToCreatePage'>
-    <text class="cuIcon-post" style='margin-right: 0.2rem'></text> 发布
+    <text class="cuIcon-post icon_right_space"></text> 发布
   </button>
 </view>
 

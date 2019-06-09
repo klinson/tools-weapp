@@ -1,2 +1,6 @@
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
+
+.icon_right_space {
+  margin-right:5rpx;
+}

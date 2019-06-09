@@ -4,8 +4,8 @@
 </cu-custom>
 
 <block wx:if="{{content}}">
-<import src="/utils/wxParse/wxParse.wxml" />
-<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  <import src="/utils/wxParse/wxParse.wxml" />
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 </block>
 
 <view wx:if="{{show_template}}" class='margin-xl bg-white padding-xl radius shadow-lg'>
@@ -15,5 +15,11 @@
     <view class='margin-top-sm'>该项目是我个人开发的一款集合论坛、社区、多功能AI智能工具的小程序</view>
     <view class='margin-top-sm'>项目是开源的，不收取任何费用，如果这个小程序帮到你，或者你觉得很赞，可以在GitHub里扫描赞赏码支持一下！</view>
     <view class='margin-top-sm'>更多功能敬请期待！</view>
+  </view>
+</view>
+
+<view bindtap='bindChangeEnv'>
+  <view class="padding text-center">
+    <text class="text-gray">Copyright © 2019-{{now_year}} klinson</text>
   </view>
 </view>

@@ -5,11 +5,11 @@
 
 <form>
   <view class="cu-form-group margin-top">
-    <view class="title">标题</view>
+    <view class="title">标题<text class='text-red'>*</text></view>
     <input bindinput='bindInputChange' placeholder="请输入标题" data-input='info.title' value='{{info.title}}'></input>
   </view>
   <view class="cu-form-group" wx:if='{{id==0}}'>
-    <view class="title">话题</view>
+    <view class="title">话题<text class='text-red'>*</text></view>
     <picker bindchange="bindInputChange" range="{{categories}}" range-key='title' value='{{info.category_index}}' data-input='info.category_index'>
       <view class="picker">
         {{info.category_index?categories[info.category_index].title:'请选择话题'}}
@@ -24,7 +24,7 @@
 
   <view class="cu-bar bg-white margin-top">
     <view class="action">
-      配图（至少一张）
+      配图（至少一张）<text class='text-red'>*</text>
     </view>
     <view class="action">
       {{info.images.length}}/9
@@ -46,7 +46,7 @@
 
   <view class="cu-bar bg-white margin-top">
     <view class="action">
-      内容
+      内容<text class='text-red'>*</text>
     </view>
   </view>
   <view class="cu-form-group">

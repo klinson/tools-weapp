@@ -1,5 +1,6 @@
 //app.js
 const https = require('/utils/https.js');
+const utils = require('/utils/util.js');
 const cache = require('/utils/cache.js');
 const notice = require('/utils/notice.js');
 wx.cloud.init({
@@ -9,6 +10,7 @@ App({
   https,
   cache,
   notice,
+  utils,
   onLaunch: function () {
     let that = this;
     this.checkEnv()
@@ -42,7 +44,7 @@ App({
 
   checkEnv: function (success, error) {
     let that = this;
-    wx.cloud.database().collection('configs').doc('f1ae76a4-7180-4544-83d6-e176e2e616bb').get({
+    wx.cloud.database().collection('configs').doc('2d9d2d8c5cfcb22d026de50c6412677f').get({
       success: function (res) {
         console.log('env:', res.data.env);
         that.globalData.env = res.data.env;

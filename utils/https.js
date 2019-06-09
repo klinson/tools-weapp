@@ -1,7 +1,7 @@
 const notice = require('./notice.js');
 var server = '';
 server = 'https://tools.klinson.com';
-server = 'http://192.168.66.3';
+// server = 'http://192.168.66.2';
 
 //GET请求
 function GET(requestHandler) {
@@ -170,6 +170,9 @@ function uploadImages(object) {
     sizeType: sizeType, 
     sourceType: sourceType, 
     success: function (res) {
+      wx.showLoading({
+        title: '上传中',
+      });
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
       var tempFilePaths = res.tempFilePaths;
       _batchUpload({
@@ -202,6 +205,7 @@ function _batchUpload(object) {
       if (object.i < object.len) {
         _batchUpload(object)
       } else {
+        wx.hideLoading();
         // 上传完毕，判断状态
         if (object.files.length > 0) {
           object.success_func && object.success_func({

@@ -27,14 +27,16 @@
       </view>
     </view>
     <view class="text-gray text-sm text-right padding">
-      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-      <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+      <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 10 -->
+      <text class="cuIcon-messagefill margin-lr-xs"></text> {{total_count}}
     </view>
   </view>
 </view>
 <view class='flex' wx:if='{{user_info.id == info.user_id}}'>
-  <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindToCreatePage">编辑</button>
-  <button class="flex-sub padding-sm margin-xs cu-btn bg-red lg shadow" bindtap="bindDeleteBtn">删除</button>
+  <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindToCreatePage">
+    <text class="cuIcon-edit icon_right_space"></text>编辑</button>
+  <button class="flex-sub padding-sm margin-xs cu-btn bg-red lg shadow" bindtap="bindDeleteBtn">
+    <text class="cuIcon-delete icon_right_space"></text>删除</button>
 </view>
 
 <view class="cu-bar bg-white margin-top">
@@ -43,17 +45,28 @@
     <text class="bg-gradual-blue" style="width:3rem"></text>
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="bottomModal">评论</button>
+    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="bottomModal">
+      <text class="cuIcon-comment icon_right_space"></text>评论</button>
   </view>
 </view>
 <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" style='text-align:left;'>
   <view class="cu-dialog">
     <view class="cu-bar bg-white">
-      <view class="action text-green" bindtap='bindSubmitComment'>确定</view>
-      <view class="action" bindtap="hideModal">取消</view>
+      <view class="action" style='font-size:36rpx;' bindtap="hideModal">取消</view>
+      <view class="action text-green text-xl" style='margin-right:30rpx;' bindtap='bindSubmitComment'>评论</view>
     </view>
     <view>
       <form>
+        <view class="cu-bar bg-white margin-top">
+          <view class="action">
+            内容
+            <text class='text-red'>*</text>
+          </view>
+        </view>
+        <view class="cu-form-group">
+          <textarea maxlength="-1" auto-height bindinput="textareaAInput" placeholder="请输入内容" data-input='comment.content' bindinput='bindInputChange' fixed='true' value='{{comment.content}}'></textarea>
+        </view>
+
         <view class="cu-bar bg-white margin-top">
           <view class="action">
             配图
@@ -75,62 +88,56 @@
             </view>
           </view>
         </view>
-
-        <view class="cu-bar bg-white margin-top">
-          <view class="action">
-            内容<text class='text-red'>*</text>
-          </view>
-        </view>
-        <view class="cu-form-group">
-          <textarea maxlength="-1" auto-height bindinput="textareaAInput" placeholder="请输入内容" data-input='comment.content' bindinput='bindInputChange' fixed='true' value='{{comment.content}}'></textarea>
-        </view>
       </form>
     </view>
   </view>
 </view>
 <view class="cu-list menu-avatar comment solids-top">
-  <view class="cu-item">
-    <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
-    <view class="content">
-      <view class="text-grey">莫甘娜</view>
-      <view class="text-gray text-content text-df">
-        凯尔，你被自己的光芒变的盲目。
+  <block wx:if='{{list.length > 0}}'>
+    <view class="cu-item" wx:for='{{list}}' wx:key>
+      <view class="cu-avatar round" style="background-image:url({{item.owner.avatar}});">
+        <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
+        <view class="cu-tag badge bg-pink" wx:else>♀</view>
       </view>
-      <view class="bg-grey padding-sm radius margin-top-sm  text-sm">
-        <view class="flex">
-          <view>凯尔：</view>
-          <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
+      <view class="content">
+        <view class="text-grey">{{item.owner.nickname}}</view>
+        <view class="text-gray text-content text-df">
+          <view wx:for='{{item.decode_content}}'>{{item}}</view>
         </view>
-      </view>
-      <view class="margin-top-sm flex justify-between">
-        <view class="text-gray text-df">2018年12月4日</view>
-        <view>
-          <text class="cuIcon-appreciatefill text-red"></text>
-          <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+        <view class="grid flex-sub padding-lr col-3 grid-square">
+          <view class="bg-img" style="background-image:url({{item_c}});" wx:for="{{item.images}}" wx:for-item='item_c' wx:for-index='index_c' wx:key="{{index}}" bindtap='ViewCommentListImage' data-url='{{item_c}}' data-key='{{index}}'>
+          </view>
+        </view>
+        <view class="bg-grey padding-sm radius margin-top-sm  text-sm" wx:if='{{item.toComment}}'>
+          <view class="flex">
+            <view>{{item.toComment.owner.nickname}}：</view>
+            <view class="flex-sub">
+              <view wx:for='{{item.toComment.decode_content}}'>{{item}}</view>
+            </view>
+          </view>
+          <view class="grid flex-sub padding-lr col-3 grid-square">
+            <view class="bg-img" style="background-image:url({{item_c}});" wx:for="{{item.toComment.images}}" wx:for-item='item_c' wx:for-index='index_c' wx:key="{{index}}" bindtap='ViewToCommentImage' data-key='{{index}}' data-url='{{item_c}}'>
+            </view>
+          </view>
+        </view>
+        <view class="margin-top-sm flex justify-between">
+          <view class="text-gray text-df">{{item.created_at}}</view>
+          <view>
+            <text class="cuIcon-messagefill text-gray margin-left-sm" bindtap='showModal' data-id='{{item.id}}' data-uid='{{item.user_id}}' data-target="bottomModal"></text>
+            <text class="cuIcon-deletefill text-red margin-left-sm" bindtap='bindDeleteComment' data-id='{{item.id}}' wx:if='{{info.user_id == user_info.id || user_info.id == item.user_id}}'></text>
+          </view>
         </view>
       </view>
     </view>
-  </view>
-  <view class="cu-item">
-    <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
-    <view class="content">
-      <view class="text-grey">凯尔</view>
-      <view class="text-gray text-content text-df">
-        妹妹，如果不是为了飞翔，我们要这翅膀有什么用?
+    <view wx:if='{{isLastPage}}'>
+      <view class="padding text-center">
+        <text class="text-gray">-- 我是有底线的 --</text>
       </view>
-      <view class="bg-grey padding-sm radius margin-top-sm  text-sm">
-        <view class="flex">
-          <view>莫甘娜：</view>
-          <view class="flex-sub">如果不能立足于大地，要这双脚又有何用?</view>
-        </view>
-      </view>
-      <view class="margin-top-sm flex justify-between">
-        <view class="text-gray text-df">2018年12月4日</view>
-        <view>
-          <text class="cuIcon-appreciate text-gray"></text>
-          <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
-        </view>
-      </view>
+    </view>
+  </block>
+  <view wx:else>
+    <view class="padding text-center">
+      <text class="text-gray">-- 暂时还没有评论，抢个沙发吧 --</text>
     </view>
   </view>
 </view>
