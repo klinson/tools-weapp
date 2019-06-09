@@ -61,7 +61,7 @@
 					"id": 2,
 					"name": "论坛+",
 					"pathName": "pages/posts/form/index",
-					"query": "category_id=0&id=0",
+					"query": "",
 					"scene": null
 				}
 			]

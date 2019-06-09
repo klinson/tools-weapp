@@ -19,7 +19,9 @@ Page({
       address: '',
       point: '',
       category_id: 0,
-      category_index: 0
+      category_index: 0,
+      point: [],
+      address: '',
     }
   },
 
