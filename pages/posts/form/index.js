@@ -17,7 +17,6 @@ Page({
       content: "",
       images: [],
       address: '',
-      point: '',
       category_id: 0,
       category_index: 0,
       point: [],
@@ -163,5 +162,23 @@ Page({
         }
       });
     }
+  },
+
+  bindGetLocation: function() {
+    let that = this;
+    wx.chooseLocation({
+      success: function(res) {
+        that.setData({
+          'info.point': [res.longitude, res.latitude],
+          'info.address': res.name
+        })
+      },
+      error: function() {
+        that.setData({
+          'info.point': [],
+          'info.address': ''
+        })
+      }
+    })
   },
 })
