@@ -19,6 +19,8 @@ Page({
 
     categories: [],
     category_id: 0,
+
+    point: [],
   },
 
   NavChange(e) {
@@ -28,6 +30,7 @@ Page({
   },
 
   onLoad(options) {
+    this.getLocation();
     this.setData({
       bottomNavBars: app.globalData.bottomNavBars,
       env: app.globalData.env
@@ -71,6 +74,7 @@ Page({
         include: 'owner,category',
         category_id: that.data.category_id,
         q: that.data.search,
+        point: that.data.point,
       },
       success: function(res) {
         if (isNext) {
@@ -93,7 +97,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.getList(0);
+    // this.getList(0);
   },
 
   /**
@@ -132,7 +136,7 @@ Page({
     })
   },
 
-  bindToShowPage: function (e) {
+  bindToShowPage: function(e) {
     wx.navigateTo({
       url: '/pages/posts/show/index?id=' + e.currentTarget.dataset.id
     })
@@ -143,6 +147,22 @@ Page({
    */
   onShow: function() {
 
+  },
+
+  getLocation: function() {
+    let that = this;
+    wx.getLocation({
+      type: 'gcj02',
+      success: function(res) {
+        // console.log(res)
+        that.setData({
+          point: [res.longitude, res.latitude],
+        })
+      },
+      complete: function() {
+        that.getList(0);
+      }
+    })
   },
 
   /**

@@ -29,35 +29,43 @@
 <view class="cu-card case">
   <block wx:if='{{list.length > 0}}'>
 
-  <view class="cu-item shadow" wx:for='{{list}}' wx:key bindtap='bindToShowPage' data-id='{{item.id}}'>
-    <view class="image">
-      <image src="{{item.images[0]}}" mode="widthFix"></image>
-      <view class="cu-tag bg-blue">{{item.category.title}}</view>
-      <view class="cu-tag bg-red" style='left: 0;right: auto;' wx:if='{{item.is_top}}'>置顶</view>
-      <view class="cu-bar bg-shadeBottom">
-        <text class="text-cut">{{item.title}}</text>
-      </view>
-    </view>
-    <view class="cu-list menu-avatar">
-      <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{item.owner.avatar}});">
-          <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
-          <view class="cu-tag badge bg-pink" wx:else>♀</view>
+    <view class="cu-item shadow" wx:for='{{list}}' wx:key bindtap='bindToShowPage' data-id='{{item.id}}'>
+      <view class="image">
+        <image src="{{item.images[0]}}" mode="widthFix"></image>
+        <view class="cu-tag bg-blue">{{item.category.title}}</view>
+        <view class="cu-tag bg-red" style='left: 0;right: auto;' wx:if='{{item.is_top}}'>置顶</view>
+        <view class="cu-bar bg-shadeBottom">
+          <text class="text-cut">{{item.title}}</text>
         </view>
-        <view class="content flex-sub">
-          <view class="text-grey">{{item.owner.nickname}}</view>
-          <view class="text-gray text-sm flex justify-between">
-            {{item.created_at}}
-            <view class="text-gray text-sm">
-              <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 10 -->
-              <text class="cuIcon-messagefill margin-lr-xs"></text> {{item.comments_count}}
+      </view>
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.owner.avatar}});">
+            <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
+            <view class="cu-tag badge bg-pink" wx:else>♀</view>
+          </view>
+          <view class="content flex-sub">
+            <view class="text-grey">{{item.owner.nickname}}</view>
+            <view class="text-gray text-sm flex justify-between">
+              {{item.created_at}}
+              <view class="text-gray text-sm">
+                <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 10 -->
+                <text class="cuIcon-messagefill margin-lr-xs"></text> {{item.comments_count}}
+              </view>
+            </view>
+            <view class="text-grey text-sm" wx:if="{{item.address}}">
+              <text class="cuIcon-locationfill"></text>
+              <text>{{item.address}} </text>
+              <block wx:if='{{item.point_distance != null}}'>
+                <text wx:if='{{item.point_distance < 1000}}'>({{item.point_distance}} 米)</text>
+                <text wx:else>({{item.point_distance * 0.001}} 公里)</text>
+              </block>
             </view>
           </view>
         </view>
       </view>
     </view>
-  </view>
-  <view wx:if='{{isLastPage}}'>
+    <view wx:if='{{isLastPage}}'>
       <view class="padding text-center">
         <text class="text-gray">-- 我是有底线的 --</text>
       </view>
