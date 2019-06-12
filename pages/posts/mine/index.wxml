@@ -1,15 +1,7 @@
-<cu-custom bgColor="{{topNavBar.bgColor}}">
-  <view slot="content">论坛</view>
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">我的论坛帖子</view>
 </cu-custom>
-
-<view class="cu-bar tabbar bg-white shadow foot">
-  <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
-    <view class='cuIcon-cu-image'>
-      <image src="/assets/icons/tabbar/{{bottomNavBar.icon}}{{bottomNavBarKey==bottomNavBar.key ? '_cur':''}}.png"></image>
-    </view>
-    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-blue':'text-gray'}}">{{bottomNavBar.title}}</view>
-  </view>
-</view>
 
 <view class="cu-bar search bg-white">
   <view class="search-form round">
@@ -19,12 +11,9 @@
   <view class="action">
     <button class="cu-btn bg-blue shadow-blur round" bindtap='bindSutmitSearch'>搜索</button>
   </view>
-  <view class="action margin-right" bindtap='getLocation'>
-    <text class="cuIcon-locationfill {{point.length > 0 ? 'text-green' : 'text-gray'}}"></text>
-  </view>
   <view class="action" bindtap='bindToMessagesPage'>
     <view class="cuIcon-messagefill text-gray">
-      <view wx:if='{{message_count > 0}}' class="cu-tag badge" style='top:20rpx;right:0rpx;'>{{message_count}}</view>
+      <view class="cu-tag badge" style='top:20rpx;right:0rpx;'>1</view>
     </view>
   </view>
 </view>
@@ -93,6 +82,3 @@
     <text class="cuIcon-post icon_right_space"></text> 发布
   </button>
 </view>
-
-<!-- 底部防止被覆盖 -->
-<view style='height: 2.5rem'></view>

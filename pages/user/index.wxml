@@ -25,12 +25,19 @@
   </button>
 </view>
 
-<view class="cu-list menu card-menu">
+<view class="cu-list menu ">
   <block wx:if='{{is_login}}'>
     <view class="cu-item arrow">
       <navigator class="content" hover-class="none" url="/pages/user/info/index" open-type="navigate">
         <text class="cuIcon-wenzi text-blue"></text>
         <text class="text-grey">个人信息</text>
+      </navigator>
+    </view>
+
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="/pages/posts/mine/index" open-type="navigate">
+        <text class="cuIcon-wenzi text-blue"></text>
+        <text class="text-grey">我的论坛帖子</text>
       </navigator>
     </view>
   </block>

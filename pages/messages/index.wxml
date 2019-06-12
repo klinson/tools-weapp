@@ -1,0 +1,38 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">消息列表</view>
+</cu-custom>
+
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{0==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="0">
+      帖子回复
+    </view>
+    <view class="cu-item flex-sub {{1==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="1">
+      其他
+    </view>
+  </view>
+</scroll-view>
+
+<view class="cu-list menu-avatar">
+  <view class="cu-item solid-bottom" wx:for='{{list}}' wx:key bindtap='bindToShowPage' data-post_id='{{item.post_id}}'>
+    <view class="cu-avatar round lg" style="background-image:url({{item.owner.avatar}});">
+    </view>
+    <view class="content">
+      <view class="text-grey">
+        <text class="text-cut">{{item.owner.nickname}}</text>
+        <view class="cu-tag round bg-orange sm">new</view>
+      </view>
+      <view class="text-gray text-sm flex">
+        {{item.content}}
+      </view>
+    </view>
+    <view class="action">
+      <view class="text-grey text-xs">{{item.created_at}}</view>
+      <view>
+        <text class="cuIcon-pic text-blue"></text> {{item.images.length}}
+      </view>
+
+    </view>
+  </view>
+</view>

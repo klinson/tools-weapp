@@ -5,11 +5,6 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     topNavBar: app.globalData.topNavBar,
-    bottomNavBars: app.globalData.bottomNavBars,
-    bottomNavBarKey: 'posts',
-
-    is_login: false,
-    user_info: null,
 
     page: 1,
     pageRows: 10,
@@ -21,30 +16,19 @@ Page({
     category_id: 0,
 
     point: [],
-
-    message_count: 0,
   },
-
-  NavChange(e) {
-    wx.redirectTo({
-      url: e.currentTarget.dataset.path,
-    })
-  },
-
+  
   onLoad(options) {
-    this.setData({
-      bottomNavBars: app.globalData.bottomNavBars,
-      env: app.globalData.env
-    });
     this.getCategories();
   },
 
-  getCategories: function() {
+
+  getCategories: function () {
     let that = this;
 
     app.https.GET({
       url: '/api/postCategories',
-      success: function(res) {
+      success: function (res) {
         let list = res.data.data;
         list.unshift({
           id: 0,
@@ -57,7 +41,7 @@ Page({
     });
   },
 
-  bindSelectCategory: function(e) {
+  bindSelectCategory: function (e) {
     this.setData({
       category_id: e.currentTarget.dataset.id
     }, () => {
@@ -65,7 +49,7 @@ Page({
     });
   },
 
-  getList: function(isNext) {
+  getList: function (isNext) {
     let that = this;
     app.https.GET({
       url: '/api/posts',
@@ -76,8 +60,9 @@ Page({
         category_id: that.data.category_id,
         q: that.data.search,
         point: that.data.point,
+        mine: 1,
       },
-      success: function(res) {
+      success: function (res) {
         if (isNext) {
           //获取下一页
           that.setData({
@@ -97,21 +82,21 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     this.getList(0);
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.getList(0);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     if (this.data.isLastPage) {
       return false;
     }
@@ -121,96 +106,31 @@ Page({
     this.getList(1);
   },
 
-  bindInputChange: function(e) {
+  bindInputChange: function (e) {
     this.setData({
       [e.target.dataset.input]: e.detail.value
     })
   },
 
-  bindSutmitSearch: function(e) {
+  bindSutmitSearch: function (e) {
     this.getList(0);
   },
 
-  bindToCreatePage: function(e) {
+  bindToCreatePage: function (e) {
     wx.navigateTo({
       url: '/pages/posts/form/index?category_id=' + this.data.category_id,
     })
   },
 
-  bindToShowPage: function(e) {
+  bindToShowPage: function (e) {
     wx.navigateTo({
       url: '/pages/posts/show/index?id=' + e.currentTarget.dataset.id
     })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    this.getMessageCount()
-  },
-
-  getLocation: function() {
-    let that = this;
-
-    if (that.data.point.length > 0) {
-      // 关闭位置
-      app.notice.showToast('关闭定位信息中', 'success', () => {
-        that.setData({
-          point: [],
-        }, () => {
-          that.getList(0);
-        })
-      })
-    } else {
-      wx.showModal({
-        title: '定位',
-        content: '开启定位进行距离测算？',
-        cancelText: '取消',
-        confirmText: '确定',
-        success: (res) => {
-          if (res.confirm) {
-            wx.getLocation({
-              type: 'gcj02',
-              success: function(res) {
-                // console.log(res)
-                that.setData({
-                  point: [res.longitude, res.latitude],
-                })
-              },
-              complete: function() {
-                that.getList(0);
-              }
-            })
-          }
-        }
-      })
-    }
-  },
-
-  bindToMessagesPage: function(e) {
+  bindToMessagesPage: function (e) {
     wx.navigateTo({
       url: '/pages/messages/index'
     })
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
-
-  getMessageCount: function() {
-    let that = this;
-    app.https.GET({
-      url: '/api/messages/count',
-      success: function(res) {
-        console.log(res)
-        that.setData({
-          message_count: res.data.comment_message_count || 0,
-        });
-      }
-    });
-  },
+  }
 })
