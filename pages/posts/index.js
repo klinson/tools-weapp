@@ -30,7 +30,6 @@ Page({
   },
 
   onLoad(options) {
-    this.getLocation();
     this.setData({
       bottomNavBars: app.globalData.bottomNavBars,
       env: app.globalData.env
@@ -97,7 +96,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    // this.getList(0);
+    this.getList(0);
   },
 
   /**
@@ -151,18 +150,40 @@ Page({
 
   getLocation: function() {
     let that = this;
-    wx.getLocation({
-      type: 'gcj02',
-      success: function(res) {
-        // console.log(res)
+
+    if (that.data.point.length > 0) {
+      // 关闭位置
+      app.notice.showToast('关闭定位信息中', 'success', () => {
         that.setData({
-          point: [res.longitude, res.latitude],
+          point: [],
+        }, () => {
+          that.getList(0);
         })
-      },
-      complete: function() {
-        that.getList(0);
-      }
-    })
+      })
+    } else {
+      wx.showModal({
+        title: '定位',
+        content: '开启定位进行距离测算？',
+        cancelText: '取消',
+        confirmText: '确定',
+        success: (res) => {
+          if (res.confirm) {
+            wx.getLocation({
+              type: 'gcj02',
+              success: function (res) {
+                // console.log(res)
+                that.setData({
+                  point: [res.longitude, res.latitude],
+                })
+              },
+              complete: function () {
+                that.getList(0);
+              }
+            })
+          }
+        }
+      })
+    }
   },
 
   /**

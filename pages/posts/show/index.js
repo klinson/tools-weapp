@@ -257,6 +257,17 @@ Page({
     })
   },
 
+  bindOpenMap: function() {
+    let that = this;
+    wx.openLocation({
+      longitude: that.data.info.point[0],
+      latitude: that.data.info.point[1],
+      name: that.data.info.address,
+      address: that.data.info.address,
+      scale: 18,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

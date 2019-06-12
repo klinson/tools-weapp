@@ -26,9 +26,19 @@
       <view class="bg-img" style="background-image:url({{item}});" wx:for="{{info.images}}" wx:key="{{index}}" bindtap='ViewImage' data-url='{{item}}'>
       </view>
     </view>
-    <view class="text-gray text-sm text-right padding">
+    <view class="text-gray text-sm padding flex justify-between">
       <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 10 -->
-      <text class="cuIcon-messagefill margin-lr-xs"></text> {{total_count}}
+      <view class="a_color" wx:if="{{info.address}}" bindtap='bindOpenMap'>
+        <text class="cuIcon-locationfill icon_right_space text-gray"></text>
+        <text>{{info.address}} </text>
+        <block wx:if='{{info.point_distance != null}}'>
+          <text wx:if='{{info.point_distance < 1000}}'>({{info.point_distance}} 米)</text>
+          <text wx:else>({{info.point_distance * 0.001}} 公里)</text>
+        </block>
+      </view>
+      <view class='text-right'>
+        <text class="cuIcon-messagefill margin-lr-xs"></text> {{total_count}}
+      </view>
     </view>
   </view>
 </view>

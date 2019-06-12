@@ -4,3 +4,7 @@
 .icon_right_space {
   margin-right:5rpx;
 }
+
+.a_color {
+  color: #6CA6CD
+}
