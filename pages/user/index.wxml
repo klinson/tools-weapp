@@ -34,12 +34,14 @@
       </navigator>
     </view>
 
-    <view class="cu-item arrow">
-      <navigator class="content" hover-class="none" url="/pages/posts/mine/index" open-type="navigate">
-        <text class="cuIcon-wenzi text-blue"></text>
-        <text class="text-grey">我的论坛帖子</text>
-      </navigator>
-    </view>
+    <block wx:if='{{env == "production"}}'>
+      <view class="cu-item arrow">
+        <navigator class="content" hover-class="none" url="/pages/posts/mine/index" open-type="navigate">
+          <text class="cuIcon-form text-blue"></text>
+          <text class="text-grey">我的论坛帖子</text>
+        </navigator>
+      </view>
+    </block>
   </block>
   <view class="cu-item arrow">
     <button class="cu-btn content" open-type="contact">
