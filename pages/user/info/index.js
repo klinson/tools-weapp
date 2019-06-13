@@ -26,6 +26,43 @@ Page({
     });
   },
 
+  ChooseImage2() {
+    let that = this;
+    app.https.uploadImages({
+      count: 9 - this.data.user_info.images.length,
+      sizeType: 2,
+      success: function (res) {
+        let images = that.data.user_info.images;
+        images = images.concat(res.urls)
+        that.setData({
+          'user_info.images': images
+        })
+      }
+    })
+  },
+  ViewImage(e) {
+    wx.previewImage({
+      urls: this.data.user_info.images,
+      current: e.currentTarget.dataset.url
+    });
+  },
+  DelImg(e) {
+    wx.showModal({
+      title: '删除图片',
+      content: '确定要删除这张图片吗？',
+      cancelText: '取消',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+          this.data.user_info.images.splice(e.currentTarget.dataset.index, 1);
+          this.setData({
+            'user_info.images': this.data.user_info.images
+          })
+        }
+      }
+    })
+  },
+
   ChooseImage() {
     let that = this;
     app.https.uploadImages({
@@ -56,6 +93,8 @@ Page({
         sex: that.data.user_info.sex,
         mobile: that.data.user_info.mobile,
         avatar: that.data.user_info.avatar,
+        signature: that.data.user_info.signature,
+        images: that.data.user_info.images,
       },
       success: function (res) {
         app.notice.showToast('更新成功');

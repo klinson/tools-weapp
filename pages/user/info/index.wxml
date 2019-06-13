@@ -38,6 +38,39 @@
       </view>
     </view>
   </view>
+
+  <view class="cu-bar bg-white margin-top">
+    <view class="action">
+      个性签名
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <textarea maxlength="-1" auto-height bindinput="textareaAInput" placeholder="请输入内容" data-input='user_info.signature' bindinput='bindInputChange' fixed='true' value='{{user_info.signature}}'></textarea>
+  </view>
+
+  <view class="cu-bar bg-white margin-top">
+    <view class="action">
+      个性照
+    </view>
+    <view class="action">
+      {{user_info.images.length}}/9
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img" wx:for="{{user_info.images}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{user_info.images[index]}}">
+        <image src='{{user_info.images[index]}}' mode='aspectFill'></image>
+        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="solids" bindtap="ChooseImage2" wx:if="{{user_info.images.length<9}}">
+        <text class="cuIcon-cameraadd"></text>
+      </view>
+    </view>
+  </view>
+
+
   <view class="padding flex flex-direction">
     <button class="cu-btn bg-blue lg shadow" bindtap="bindSubmitDo">保存</button>
   </view>
