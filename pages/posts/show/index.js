@@ -13,8 +13,9 @@ Page({
 
     id: 0,
     info: null,
-
+  
     user_info: app.globalData.userInfo,
+    is_login: false,
 
     comment: {
       images: [],
@@ -30,6 +31,49 @@ Page({
     total_count: 0,
   },
 
+  bindGetUserInfo: function (e) {
+    let that = this;
+    if (e.detail.userInfo) {
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            app.loginDo({
+              code: res.code,
+              user_info: e.detail.userInfo,
+              success: function (res) {
+                that.setData({
+                  is_login: true,
+                  user_info: res.data.user
+                })
+                app.notice.showToast('登录成功')
+              },
+              error: function (res) {
+                that.setData({
+                  is_login: false,
+                  user_info: null
+                })
+                app.notice.showToast('登录失败', 'fail')
+              }
+            })
+          } else {
+            that.setData({
+              is_login: false,
+              user_info: null
+            })
+            app.notice.showToast('登录失败', 'fail')
+          }
+        }
+      });
+    } else {
+      that.setData({
+        is_login: false,
+        user_info: null
+      })
+      app.notice.showToast('登录失败', 'fail')
+    };
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -37,7 +81,6 @@ Page({
     if (options.id) {
       this.setData({
         id: options.id,
-        user_info: app.globalData.userInfo
       }, () => {
         this.getInfo(options.id)
       })
@@ -45,6 +88,27 @@ Page({
       wx.navigateBack({
         delta: 1
       })
+    }
+  },
+
+  /**
+ * 生命周期函数--监听页面显示
+ */
+  onShow: function () {
+    this.updateLoginInfo();
+  },
+
+  updateLoginInfo() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        user_info: app.globalData.userInfo,
+        is_login: true
+      });
+    } else {
+      this.setData({
+        user_info: null,
+        is_login: false
+      });
     }
   },
 

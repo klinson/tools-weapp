@@ -36,6 +36,7 @@
           <text wx:else>({{info.point_distance * 0.001}} 公里)</text>
         </block>
       </view>
+      <view wx:else></view>
       <view class='text-right'>
         <text class="cuIcon-messagefill margin-lr-xs"></text> {{total_count}}
       </view>
@@ -55,8 +56,12 @@
     <text class="bg-gradual-blue" style="width:3rem"></text>
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="bottomModal">
-      <text class="cuIcon-comment icon_right_space"></text>评论</button>
+    <button wx:if='{{is_login}}' class="cu-btn bg-green shadow" bindtap="showModal" data-target="bottomModal">
+      <text class="cuIcon-comment icon_right_space"></text>评论
+    </button>
+    <button wx:else class="cu-btn bg-green shadow" bindgetuserinfo='bindGetUserInfo' open-type='getUserInfo'>
+      <text class="cuIcon-comment icon_right_space"></text>登录后评论
+    </button>
   </view>
 </view>
 <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" style='text-align:left;'>
@@ -133,7 +138,7 @@
         <view class="margin-top-sm flex justify-between">
           <view class="text-gray text-df">{{item.created_at}}</view>
           <view>
-            <text class="cuIcon-messagefill text-gray margin-left-sm" bindtap='showModal' data-id='{{item.id}}' data-uid='{{item.user_id}}' data-target="bottomModal"></text>
+            <text class="cuIcon-messagefill text-gray margin-left-sm" bindtap='showModal' data-id='{{item.id}}' data-uid='{{item.user_id}}' data-target="bottomModal" wx:if='{{is_login && user_info.id != item.user_id}}'></text>
             <text class="cuIcon-deletefill text-red margin-left-sm" bindtap='bindDeleteComment' data-id='{{item.id}}' wx:if='{{info.user_id == user_info.id || user_info.id == item.user_id}}'></text>
           </view>
         </view>

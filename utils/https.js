@@ -1,7 +1,7 @@
 const notice = require('./notice.js');
 var server = '';
 server = 'https://tools.klinson.com';
-// server = 'http://192.168.66.2';
+// server = 'http://192.168.66.3';
 
 //GET请求
 function GET(requestHandler) {
@@ -40,7 +40,7 @@ function request(method, requestHandler) {
     title: '加载中',
   });
   let sessionId = wx.getStorageSync('login_token');
-  console.log('login_token', sessionId)
+  // console.log('login_token', sessionId)
   wx.request({
     url: API_URL,
     data: JSON.stringify(params),

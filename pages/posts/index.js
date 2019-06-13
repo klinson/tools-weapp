@@ -101,6 +101,20 @@ Page({
     this.getList(0);
   },
 
+  updateLoginInfo() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        user_info: app.globalData.userInfo,
+        is_login: true
+      });
+    } else {
+      this.setData({
+        user_info: null,
+        is_login: false
+      });
+    }
+  },
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -147,6 +161,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.updateLoginInfo();
     this.getMessageCount()
   },
 
@@ -202,15 +217,63 @@ Page({
   },
 
   getMessageCount: function() {
+    if (!this.data.is_login) {
+      this.setData({
+        message_count: 0,
+      });
+      return;
+    }
     let that = this;
-    app.https.GET({
-      url: '/api/messages/count',
+    app.api.message.count({
       success: function(res) {
-        console.log(res)
         that.setData({
-          message_count: res.data.comment_message_count || 0,
+          message_count: Number(res.data.comment_message_count) + Number(res.data.other_count),
         });
       }
-    });
+    })
   },
+
+  bindGetUserInfo: function (e) {
+    let that = this;
+    if (e.detail.userInfo) {
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            app.loginDo({
+              code: res.code,
+              user_info: e.detail.userInfo,
+              success: function (res) {
+                that.setData({
+                  is_login: true,
+                  user_info: res.data.user
+                })
+                that.bindToCreatePage();
+              },
+              error: function (res) {
+                that.setData({
+                  is_login: false,
+                  user_info: null
+                })
+                app.notice.showToast('登录失败', 'fail')
+              }
+            })
+          } else {
+            that.setData({
+              is_login: false,
+              user_info: null
+            })
+            app.notice.showToast('登录失败', 'fail')
+          }
+        }
+      });
+    } else {
+      that.setData({
+        is_login: false,
+        user_info: null
+      })
+      app.notice.showToast('登录失败', 'fail')
+    };
+  },
+
 })

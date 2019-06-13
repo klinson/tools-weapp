@@ -3,6 +3,7 @@ const https = require('/utils/https.js');
 const utils = require('/utils/util.js');
 const cache = require('/utils/cache.js');
 const notice = require('/utils/notice.js');
+const api = require('/utils/api.js');
 wx.cloud.init({
   env: 'random-78lbw'
 })
@@ -11,6 +12,7 @@ App({
   cache,
   notice,
   utils,
+  api,
   onLaunch: function () {
     let that = this;
     this.checkEnv()

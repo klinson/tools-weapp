@@ -11,11 +11,18 @@ Page({
     isLastPage: 0,
     list: [],
     TabCur: 0,
+
+    message_count: {
+      comment_message_count: 0,
+      other_count: 0
+    },
   },
 
   tabSelect(e) {
     this.setData({
       TabCur: e.currentTarget.dataset.id,
+    }, () => {
+      this.clearMessageCount();
     })
   },
 
@@ -51,10 +58,44 @@ Page({
     });
   },
 
+  getMessageCount: function () {
+    let that = this;
+    app.api.message.count({
+      success: function (res) {
+        that.setData({
+          message_count: res.data,
+        });
+        that.clearMessageCount();
+      }
+    })
+  },
+
+  clearMessageCount: function () {
+    let type, now_count;
+    switch (Number(this.data.TabCur)) {
+      case 0:
+        now_count = this.data.message_count.comment_message_count || 0;
+        type = 'comment';
+        break;
+      case 1:
+        now_count = this.data.message_count.other_count || 0;
+        type = 'other';
+        break;
+    }
+    if (! (now_count && now_count > 0)) {
+      return;
+    }
+    let that = this;
+    app.api.message.clearCount({
+      type: type
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.getMessageCount()
     this.getList(0);
   },
 

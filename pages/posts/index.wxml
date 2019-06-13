@@ -22,7 +22,7 @@
   <view class="action margin-right" bindtap='getLocation'>
     <text class="cuIcon-locationfill {{point.length > 0 ? 'text-green' : 'text-gray'}}"></text>
   </view>
-  <view class="action" bindtap='bindToMessagesPage'>
+  <view wx:if='{{is_login}}' class="action" bindtap='bindToMessagesPage'>
     <view class="cuIcon-messagefill text-gray">
       <view wx:if='{{message_count > 0}}' class="cu-tag badge" style='top:20rpx;right:0rpx;'>{{message_count}}</view>
     </view>
@@ -89,7 +89,10 @@
 
 
 <view class='float-btn-group'>
-  <button class="cu-btn bg-green button-hover shadow-blur lg float-btn-item" role="button" aria-label="" aria-disabled="false" bindtap='bindToCreatePage'>
+  <button wx:if='{{is_login}}' class="cu-btn bg-green button-hover shadow-blur lg float-btn-item"  bindtap='bindToCreatePage'>
+    <text class="cuIcon-post icon_right_space"></text> 发布
+  </button>
+  <button wx:else class="cu-btn bg-green button-hover shadow-blur lg float-btn-item" bindgetuserinfo='bindGetUserInfo' open-type='getUserInfo'>
     <text class="cuIcon-post icon_right_space"></text> 发布
   </button>
 </view>

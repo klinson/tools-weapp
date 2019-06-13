@@ -29,10 +29,19 @@ Page({
   },
 
   onShow() {
+    this.updateLoginInfo();
+  },
+
+  updateLoginInfo() {
     if (app.globalData.userInfo) {
       this.setData({
         user_info: app.globalData.userInfo,
         is_login: true
+      });
+    } else {
+      this.setData({
+        user_info: null,
+        is_login: false
       });
     }
   },
