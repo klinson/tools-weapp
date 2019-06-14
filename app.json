@@ -12,7 +12,8 @@
     "pages/posts/form/index",
     "pages/posts/show/index",
     "pages/posts/mine/index",
-    "pages/messages/index"
+    "pages/messages/index",
+    "pages/favours/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

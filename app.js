@@ -79,6 +79,12 @@ App({
               path: '/pages/posts/index',
             },
             {
+              key: 'favours',
+              title: '配对',
+              icon: 'posts',
+              path: '/pages/favours/index',
+            },
+            {
               key: 'tools',
               title: '工具',
               icon: 'tools',
@@ -178,7 +184,7 @@ App({
       if (next_time < now_timestamp) {
         // 已停止状态,没有按时执行
         // 删除旧的
-        clearInterval(res.timer)
+        clearInterval(timer)
         wx.removeStorageSync('user_location_timer');
         wx.removeStorageSync('user_location_record_next_time');
       } else {
@@ -221,6 +227,12 @@ App({
         title: '论坛',
         icon: 'posts',
         path: '/pages/posts/index',
+      },
+      {
+        key: 'favours',
+        title: '配对',
+        icon: 'posts',
+        path: '/pages/favours/index',
       },
       {
         key: 'tools',

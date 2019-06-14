@@ -1,0 +1,56 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}">
+  <view slot="content">配对</view>
+</cu-custom>
+
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>
+    <view class='cuIcon-cu-image'>
+      <image src="/assets/icons/tabbar/{{bottomNavBar.icon}}{{bottomNavBarKey==bottomNavBar.key ? '_cur':''}}.png"></image>
+    </view>
+    <view class="{{bottomNavBarKey==bottomNavBar.key?'text-blue':'text-gray'}}">{{bottomNavBar.title}}</view>
+  </view>
+</view>
+
+<view class="cu-card case no-card flex-wrap justify-around">
+  <view class="cu-item shadow animation-{{animation==item.name+'s'?item.name:''}} animation-reverse">
+    <view class="image ">
+      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg " mode="widthFix "></image>
+      <view class="cu-tag bg-blue ">史诗</view>
+      <view class="cu-bar bg-shadeBottom ">
+        <text class="text-cut ">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text>
+      </view>
+    </view>
+    <view class="cu-list menu-avatar ">
+      <view class="cu-item ">
+        <view class="cu-avatar round lg " style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg); "></view>
+        <view class="content flex-sub ">
+          <view class="text-grey ">正义天使 凯尔</view>
+          <view class="text-gray text-sm flex justify-between ">
+            十天前
+            <view class="text-gray text-sm ">
+              <text class="cuIcon-attentionfill margin-lr-xs "></text> 10
+              <text class="cuIcon-appreciatefill margin-lr-xs "></text> 20
+              <text class="cuIcon-messagefill margin-lr-xs "></text> 30
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view class='flex'>
+  <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindFavour" data-type='0'>
+    <text class="cuIcon-edit icon_right_space"></text>没兴趣</button>
+  <button class="flex-sub padding-sm margin-xs cu-btn bg-red lg shadow" bindtap="bindFavour" data-type='1'>
+    <text class="cuIcon-delete icon_right_space"></text>喜欢</button>
+</view>
+
+
+
+
+
+
+<!-- 底部防止被覆盖 -->
+<view style='height: 2.5rem'></view>
