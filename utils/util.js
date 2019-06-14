@@ -22,8 +22,13 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const nowTimestamp = () => {
+  return Date.parse(new Date());
+}
+
 module.exports = {
   formatTime: formatTime,
   year: year,
   now_year: now_year,
+  nowTimestamp: nowTimestamp,
 }

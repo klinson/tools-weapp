@@ -21,6 +21,7 @@ App({
     let user = wx.getStorageSync('user_info');
     if (user && wx.getStorageSync('login_token')) {
       this.globalData.userInfo = user;
+      that.startRecordLocation();
     } else {
       wx.login({
         success: res => {
@@ -28,6 +29,10 @@ App({
           that.loginDo({
             code: res.code,
             is_try: true,
+            try_success: function() {
+              that.startRecordLocation();
+              // api.user.recordLocation();
+            }
           })
         }
       })
@@ -161,6 +166,49 @@ App({
       }
     })
   },
+
+  startRecordLocation() {
+    let now_timestamp = utils.nowTimestamp();
+    let times = 300000; //5分钟记录一次定位一次
+    let that = this;
+    let timer = wx.getStorageSync('user_location_timer')
+    let next_time = wx.getStorageSync('user_location_record_next_time')
+
+    if (timer && next_time) {
+      if (next_time < now_timestamp) {
+        // 已停止状态,没有按时执行
+        // 删除旧的
+        clearInterval(res.timer)
+        wx.removeStorageSync('user_location_timer');
+        wx.removeStorageSync('user_location_record_next_time');
+      } else {
+        // 正常无需处理
+        return ;
+      }
+    }
+
+    // 重新启动记录
+    if (that.globalData.userInfo) {
+      api.user.recordLocation();
+      wx.setStorage({
+        key: 'user_location_record_next_time',
+        data: utils.nowTimestamp() + times,
+      })
+      // 5分钟记录一次定位
+      let timer = setInterval(() => {
+        api.user.recordLocation();
+        wx.setStorage({
+          key: 'user_location_record_next_time',
+          data: utils.nowTimestamp() + times,
+        })
+      }, times);
+      wx.setStorage({
+        key: 'user_location_timer',
+        data: timer,
+      })
+    }
+  },
+
   globalData: {
     env: 'production',
     userInfo: null,

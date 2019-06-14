@@ -36,9 +36,11 @@ function request(method, requestHandler) {
   let params = requestHandler.params;
   let API_URL = server + requestHandler.url;
   
-  wx.showLoading({
-    title: '加载中',
-  });
+  if (!requestHandler.hidden_loading) {
+    wx.showLoading({
+      title: '加载中',
+    })
+  };
   let sessionId = wx.getStorageSync('login_token');
   // console.log('login_token', sessionId)
   wx.request({
@@ -51,7 +53,9 @@ function request(method, requestHandler) {
     },
     success: function (res) {
       console.log(res);
-      wx.hideLoading();
+      if (!requestHandler.hidden_loading) {
+        wx.hideLoading();
+      };
       let message = '操作错误';
       let status_code = res.data.status_code || res.statusCode;
       switch (status_code) {
