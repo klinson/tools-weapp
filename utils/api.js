@@ -58,6 +58,8 @@ function recordLocation(object) {
   })
 }
 
+// 
+
 module.exports = {
   message: {
     count: getMessageCount,

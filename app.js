@@ -81,7 +81,7 @@ App({
             {
               key: 'favours',
               title: '配对',
-              icon: 'posts',
+              icon: 'favours',
               path: '/pages/favours/index',
             },
             {
@@ -231,7 +231,7 @@ App({
       {
         key: 'favours',
         title: '配对',
-        icon: 'posts',
+        icon: 'favours',
         path: '/pages/favours/index',
       },
       {
