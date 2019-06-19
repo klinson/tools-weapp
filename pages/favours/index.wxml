@@ -11,9 +11,9 @@
   </view>
 </view>
 
-<view class="cu-card case no-card flex-wrap justify-around">
-  <view class="cu-item shadow animation-{{animation}} {{reverse ? 'animation-reverse' : ''}}">
-    <block wx:if='{{user}}'>
+<block wx:if='{{user}}'>
+  <view class="cu-card case no-card flex-wrap justify-around">
+    <view class="cu-item shadow animation-{{animation}} {{reverse ? 'animation-reverse' : ''}}">
       <view class="tower-swiper" bindtouchmove="towerMove" bindtouchstart="towerStart" bindtouchend="towerEnd">
         <view class="tower-item {{item.zIndex==1?'none':''}}" wx:for="{{swiperList}}" wx:key style="--index:{{item.zIndex}};--left:{{item.mLeft}}">
           <view class="swiper-item">
@@ -21,7 +21,7 @@
           </view>
         </view>
       </view>
-      <view class="cu-list menu-avatar" style='height: 10rem;overflow:visible;'>
+      <view class="cu-list menu-avatar" style='overflow:visible;'>
         <view class="cu-item margin-top" style='display:inherit;'>
           <view class="cu-avatar round lg " style="background-image:url({{user.avatar}}); ">
             <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
@@ -33,38 +33,23 @@
             <view class="text-gray text-sm flex justify-between ">
               {{user.created_at}}
               <view class="text-gray text-sm ">
-                <text class="cuIcon-location margin-lr-xs "></text> {{user.distance < 1000 ? '1公里以内' : user.distance*0.001 + '公里'}}
+                <text class="cuIcon-location margin-lr-xs "></text> {{user.distance
+                < 1000 ? '1公里以内' : user.distance*0.001 + '公里'}} </view>
               </view>
             </view>
           </view>
         </view>
       </view>
-    </block>
-    <block wx:else>
-      <view class="image">
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg " mode="widthFix "></image>
-      </view>
-      <view class="cu-list menu-avatar " style='height: 10rem;overflow:visible;'>
-        <view class="cu-item margin-top" style='display:inherit;'>
-          <view class="cu-avatar round lg " style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg); ">
-            <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
-            <view class="cu-tag badge bg-pink" wx:else>♀</view>
-          </view>
-          <view class="content flex-sub ">
-            <view class="text-grey ">正义天使 凯尔</view>
-            <view class="text-grey text-sm">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</view>
-            <view class="text-gray text-sm flex justify-between ">
-              十天前
-              <view class="text-gray text-sm ">
-                <text class="cuIcon-location margin-lr-xs "></text> 1公里以内
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
+    </view>
+</block>
+
+<block wx:else>
+  <view class='padding-sm align-center'>
+    <view class='bg-grey padding-xl radius text-center shadow-blur'>
+      没有更多用户了
+    </view>
   </view>
-</view>
+</block>
 
 <view class='flex' wx:if='{{user}}' style='bottom: 10%;'>
   <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindFavour" data-type='0' disabled='{{disabled}}'>

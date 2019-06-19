@@ -99,11 +99,19 @@ Page({
       success: function (res) {
         let list = that.data.list.concat(res.data.data)
         if (!that.data.user) {
-          let user = list.shift();
-          that.setData({
-            list: list,
-            user: user,
-          });
+          if (list.length <= 0) {
+            that.setData({
+              list: list,
+              user: null,
+            });
+            app.notice.showToast('没有更多用户了', 'fail')
+          } else {
+            let user = list.shift();
+            that.setData({
+              list: list,
+              user: user,
+            });
+          }
         } else {
           that.setData({
             list: list,
