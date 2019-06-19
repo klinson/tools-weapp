@@ -14,13 +14,13 @@
 <block wx:if='{{user}}'>
   <view class="cu-card case no-card flex-wrap justify-around">
     <view class="cu-item shadow animation-{{animation}} {{reverse ? 'animation-reverse' : ''}}">
-      <view class="tower-swiper" bindtouchmove="towerMove" bindtouchstart="towerStart" bindtouchend="towerEnd">
-        <view class="tower-item {{item.zIndex==1?'none':''}}" wx:for="{{swiperList}}" wx:key style="--index:{{item.zIndex}};--left:{{item.mLeft}}">
+      <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff" bindtap='ViewImage'>
+        <swiper-item wx:for="{{user.images}}" wx:key class="{{cardCur==index?'cur':''}}">
           <view class="swiper-item">
-            <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+            <image src="{{item}}" mode="aspectFill"></image>
           </view>
-        </view>
-      </view>
+        </swiper-item>
+      </swiper>
       <view class="cu-list menu-avatar" style='overflow:visible;'>
         <view class="cu-item margin-top" style='display:inherit;'>
           <view class="cu-avatar round lg " style="background-image:url({{user.avatar}}); ">
