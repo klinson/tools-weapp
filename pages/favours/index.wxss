@@ -1,18 +1,17 @@
 /* pages/favours/index.wxss */
 @import "../../colorui/animation.wxss";
 
-.float-btn-group {
+.float-btn-left {
   position: fixed;
   bottom: 10%;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
+  left: 5%;
+  width: 8rem;
+}
+.float-btn-right {
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  width: 8rem;
 }
 
-.float-btn-group .float-btn-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align:center;
-  width: 9rem;
-}
+

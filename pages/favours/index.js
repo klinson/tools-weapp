@@ -16,6 +16,8 @@ Page({
     user: null,
 
     cardCur: 0,
+
+    showModal: false,
   },
 
   NavChange(e) {
@@ -115,6 +117,11 @@ Page({
       favour: is_favour,
       to_user_id: this.data.user.id,
       success: function(res) {
+        if (res.data.is_coupled) {
+          that.setData({
+            showModal: true,
+          });
+        }
         // 获取下个人
         let list = that.data.list;
         if (list.length <= 0) {
@@ -170,47 +177,22 @@ Page({
     })
   },
 
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
+  hideModal: function(e) {
+    this.setData({
+      showModal: false
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
+  bindToChatRoom: function(e) {
+    this.setData({
+      showModal: false
+    })
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
 
   },
 

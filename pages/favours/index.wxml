@@ -49,11 +49,30 @@
   </view>
 </block>
 
-<view class='padding-sm float-btn-group' wx:if='{{user}}'>
-  <button class="padding-sm margin-xs cu-btn bg-blue lg shadow float-btn-item" bindtap="bindFavour" data-type='0' disabled='{{disabled}}'>
+
+<view class='padding-sm' wx:if='{{user}}'>
+  <button class="padding-sm margin-xs cu-btn bg-blue lg shadow float-btn-left" bindtap="bindFavour" data-type='0' disabled='{{disabled}}'>
     <text class="cuIcon-pullleft icon_right_space"></text>没兴趣</button>
-  <button class="padding-sm margin-xs cu-btn bg-red lg shadow float-btn-item" bindtap="bindFavour" data-type='1' disabled='{{disabled}}'>
+  <button class="padding-sm margin-xs cu-btn bg-red lg shadow float-btn-right" bindtap="bindFavour" data-type='1' disabled='{{disabled}}'>
     <text class="cuIcon-like icon_right_space"></text>喜欢</button>
+</view>
+
+<view class="cu-modal {{showModal ?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">配对成功</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      恭喜你和xxx对彼此都选择了“喜欢”，成功配对成功
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub solid-left" bindtap="hideModal">取消</view>
+      <view class="action margin-0 flex-sub  text-green  solid-left" bindtap="bindToChatRoom">进入聊天</view>
+    </view>
+  </view>
 </view>
 
 <!-- 底部防止被覆盖 -->
