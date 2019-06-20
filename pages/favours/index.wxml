@@ -12,8 +12,8 @@
 </view>
 
 <block wx:if='{{user}}'>
-  <view class="cu-card case no-card flex-wrap justify-around">
-    <view class="cu-item shadow animation-{{animation}} {{reverse ? 'animation-reverse' : ''}}">
+  <view class="grid col-1 bg-white shadow animation-{{animation}} {{reverse ? 'animation-reverse' : ''}}">
+    <view>
       <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff" bindtap='ViewImage'>
         <swiper-item wx:for="{{user.images}}" wx:key class="{{cardCur==index?'cur':''}}">
           <view class="swiper-item">
@@ -21,22 +21,20 @@
           </view>
         </swiper-item>
       </swiper>
-      <view class="cu-list menu-avatar" style='overflow:visible;'>
-        <view class="cu-item margin-top" style='display:inherit;'>
-          <view class="cu-avatar round lg " style="background-image:url({{user.avatar}}); ">
-            <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
-            <view class="cu-tag badge bg-pink" wx:else>♀</view>
-          </view>
-          <view class="content flex-sub ">
-            <view class="text-grey ">{{user.nickname}}</view>
-            <view class="text-grey text-sm">{{user.signature ? user.signature : '对方太懒了，还没有留下签名'}}</view>
-            <view class="text-gray text-sm flex justify-between ">
-              {{user.created_at}}
-              <view class="text-gray text-sm ">
-                <text class="cuIcon-location margin-lr-xs "></text> {{user.distance
-                < 1000 ? '1公里以内' : user.distance*0.001 + '公里'}} </view>
-              </view>
-            </view>
+    </view>
+    <view class='flex justify-start padding'>
+      <view class="cu-avatar round lg margin-right" style="background-image:url({{user.avatar}}); ">
+        <view class="cu-tag badge bg-blue light" wx:if='{{item.owner.sex==1}}'>♂</view>
+        <view class="cu-tag badge bg-pink" wx:else>♀</view>
+      </view>
+      <view class='content flex-sub '>
+        <view class='text-xl text-black margin-bottom-sm'>{{user.nickname}}</view>
+        <view class='text-lg margin-bottom-xs'>{{user.signature ? user.signature : '对方太懒了，还没有留下签名'}}</view>
+        <view class="text-gray text-sm flex justify-between align-center">
+          <view>{{user.created_at}}</view>
+          <view class="text-gray text-sm ">
+            <text class="cuIcon-location margin-lr-xs "></text> {{user.distance
+            < 1000 ? '1公里以内' : user.distance*0.001 + '公里'}} </view>
           </view>
         </view>
       </view>
@@ -51,17 +49,12 @@
   </view>
 </block>
 
-<view class='flex' wx:if='{{user}}' style='bottom: 10%;'>
-  <button class="flex-sub padding-sm margin-xs cu-btn bg-blue lg shadow" bindtap="bindFavour" data-type='0' disabled='{{disabled}}'>
+<view class='padding-sm float-btn-group' wx:if='{{user}}'>
+  <button class="padding-sm margin-xs cu-btn bg-blue lg shadow float-btn-item" bindtap="bindFavour" data-type='0' disabled='{{disabled}}'>
     <text class="cuIcon-pullleft icon_right_space"></text>没兴趣</button>
-  <button class="flex-sub padding-sm margin-xs cu-btn bg-red lg shadow" bindtap="bindFavour" data-type='1' disabled='{{disabled}}'>
+  <button class="padding-sm margin-xs cu-btn bg-red lg shadow float-btn-item" bindtap="bindFavour" data-type='1' disabled='{{disabled}}'>
     <text class="cuIcon-like icon_right_space"></text>喜欢</button>
 </view>
 
-
-
-
-
-
 <!-- 底部防止被覆盖 -->
-<view style='height: 2.5rem'></view>
+<view style='height: 10rem'></view>

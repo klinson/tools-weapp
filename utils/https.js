@@ -1,7 +1,7 @@
 const notice = require('./notice.js');
 var server = '';
 server = 'https://tools.klinson.com';
-// server = 'http://192.168.66.2';
+// server = 'http://192.168.66.3';
 
 //GET请求
 function GET(requestHandler) {
@@ -64,6 +64,7 @@ function request(method, requestHandler) {
             message = res.data.message;
           }
           notice.showModal('', message);
+          requestHandler.error && requestHandler.error(res);
           break;
         case 401:
           wx.removeStorage({
@@ -89,12 +90,15 @@ function request(method, requestHandler) {
               }
             })
           });
+          requestHandler.error && requestHandler.error(res);
           break;
         case 403:
           notice.showToast('用户无权限', 'fail');
+          requestHandler.error && requestHandler.error(res);
           break;
         case 404:
           notice.showToast('API不存在', 'fail');
+          requestHandler.error && requestHandler.error(res);
           break;
         case 422:
           for (var p in res.data.errors) {
@@ -103,11 +107,13 @@ function request(method, requestHandler) {
           }
 
           notice.showModal('', message);
+          requestHandler.error && requestHandler.error(res);
           break;
         case 500:
         case 501:
         case 502:
           notice.showToast('服务器异常', 'fail');
+          requestHandler.error && requestHandler.error(res);
           break;
         default:
           requestHandler.success && requestHandler.success(res);

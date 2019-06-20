@@ -58,6 +58,30 @@ function recordLocation(object) {
   })
 }
 
+// 喜欢或者不喜欢
+function favour(object) {
+  let url = '';
+  if (object.favour) {
+    url = '/api/favour/';
+  } else {
+    url = '/api/unfavour/';
+  }
+  url = url + object.to_user_id;
+  https.POST({
+    // hidden_loading: true,
+    url: url,
+    success: function (res) {
+      object && object.success && object.success(res)
+    },
+    error: function (res) {
+      object && object.error && object.error(res)
+    },
+    fail: function (res) {
+      object && object.fail && object.fail(res)
+    }
+  });
+}
+
 // 
 
 module.exports = {
@@ -67,5 +91,6 @@ module.exports = {
   },
   user: {
     recordLocation: recordLocation,
+    favour: favour,
   },
 }
