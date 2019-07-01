@@ -1,0 +1,42 @@
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">匹配列表</view>
+</cu-custom>
+
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="输入搜索的关键词" confirm-type="search" data-input='search' bindinput='bindInputChange'></input>
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-gradual-green shadow-blur round" bindtap='getList'>搜索</button>
+  </view>
+</view>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - {{CustomBar}}px - 50px)" scroll-with-animation="true" enable-back-to-top="true">
+  <block wx:for="{{list}}" wx:key>
+    <view class="padding indexItem-{{item.title}}" id="indexes-{{item.title}}" data-index="{{item.title}}">{{item.title}}</view>
+    <view class="cu-list menu-avatar no-padding">
+      <view class="cu-item" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="item_c" bindtap='bindShow' data-friend_user_id='{{item_c.friend_id}}'>
+        <view class="cu-avatar round lg" style='background-image:url({{item_c.avatar}});'>
+          <view class="cu-tag badge bg-blue light" wx:if='{{item_c.sex==1}}'>♂</view>
+          <view class="cu-tag badge bg-pink" wx:else>♀</view>
+        </view>
+        <view class="content">
+          <view class="text-grey">{{item_c.alias}}</view>
+          <view class="text-gray text-sm">
+            {{item_c.signature}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)">
+  <view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+    <view class="indexBar-item" wx:for="{{keys}}" wx:key id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{item}}</view>
+  </view>
+</view>
+<!--选择显示-->
+<view hidden="{{hidden}}" class="indexToast">
+  {{listCur}}
+</view>

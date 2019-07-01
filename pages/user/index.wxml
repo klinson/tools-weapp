@@ -36,6 +36,12 @@
 
     <block wx:if='{{env == "production"}}'>
       <view class="cu-item arrow">
+        <navigator class="content" hover-class="none" url="/pages/friends/index" open-type="navigate">
+          <text class="cuIcon-form text-blue"></text>
+          <text class="text-grey">匹配列表</text>
+        </navigator>
+      </view>
+      <view class="cu-item arrow">
         <navigator class="content" hover-class="none" url="/pages/posts/mine/index" open-type="navigate">
           <text class="cuIcon-form text-blue"></text>
           <text class="text-grey">我的论坛帖子</text>

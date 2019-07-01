@@ -13,6 +13,10 @@
     "pages/posts/show/index",
     "pages/posts/mine/index",
     "pages/messages/index",
+    "pages/friends/index",
+    "pages/friends/show/index",
+    "pages/chat_rooms/index",
+    "pages/chat_rooms/show/index",
     "pages/favours/index"
   ],
   "window": {
