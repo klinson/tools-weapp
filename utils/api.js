@@ -82,7 +82,40 @@ function favour(object) {
   });
 }
 
-// 
+// 用户信息
+function user_info(object) {
+  let url = '/api/users/' + object.user_id;
+  https.GET({
+    url: url,
+    success: function (res) {
+      object && object.success && object.success(res)
+    },
+    error: function (res) {
+      object && object.error && object.error(res)
+    },
+    fail: function (res) {
+      object && object.fail && object.fail(res)
+    }
+  });
+}
+
+// 朋友信息
+function friend_info(object) {
+  let url = '/api/friends/' + object.friend_id;
+  https.GET({
+    url: url,
+    params: object.params,
+    success: function (res) {
+      object && object.success && object.success(res)
+    },
+    error: function (res) {
+      object && object.error && object.error(res)
+    },
+    fail: function (res) {
+      object && object.fail && object.fail(res)
+    }
+  });
+}
 
 module.exports = {
   message: {
@@ -92,5 +125,9 @@ module.exports = {
   user: {
     recordLocation: recordLocation,
     favour: favour,
+    info: user_info,
+  },
+  friend: {
+    info: friend_info,
   },
 }

@@ -11,20 +11,20 @@ Page({
     CustomBar: app.globalData.CustomBar,
     topNavBar: app.globalData.topNavBar,
 
-    user_id: 0,
-    user: null,
+    friend_id: 0,
+    friend: null,
   },
 
   getInfo: function (id) {
     let that = this;
-    app.https.GET({
-      url: '/api/users/' + id,
+    app.api.friend.info({
+      friend_id: id,
       params: {
-        include: ''
+        include: 'friend'
       },
       success: function (res) {
         that.setData({
-          user: res.data,
+          friend: res.data,
         });
       }
     });
@@ -34,17 +34,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.user_id) {
-      this.getInfo(options.user_id);
+    if (options.friend_id) {
+      this.getInfo(options.friend_id);
       this.setData({
-        user_id: options.user_id
+        friend_id: options.friend_id
       })
     }
   },
 
   bindToChatRoom: function() {
     wx.navigateTo({
-      url: '/pages/chat_rooms/show?user_id='+this.options.user_id,
+      url: '/pages/chat_rooms/show/index?friend_id=' + this.options.friend_id,
     })
   }
 

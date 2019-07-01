@@ -16,7 +16,7 @@
   <block wx:for="{{list}}" wx:key>
     <view class="padding indexItem-{{item.title}}" id="indexes-{{item.title}}" data-index="{{item.title}}">{{item.title}}</view>
     <view class="cu-list menu-avatar no-padding">
-      <view class="cu-item" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="item_c" bindtap='bindShow' data-friend_user_id='{{item_c.friend_id}}'>
+      <view class="cu-item" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="item_c" bindtap='bindShow' data-friend_id='{{item_c.id}}'>
         <view class="cu-avatar round lg" style='background-image:url({{item_c.avatar}});'>
           <view class="cu-tag badge bg-blue light" wx:if='{{item_c.sex==1}}'>♂</view>
           <view class="cu-tag badge bg-pink" wx:else>♀</view>

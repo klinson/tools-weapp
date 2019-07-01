@@ -40,10 +40,9 @@ Page({
 
   
   bindShow: function(e) {
-    let friend_user_id = e.currentTarget.dataset.friend_user_id;
-
+    let friend_id = e.currentTarget.dataset.friend_id;
     wx.navigateTo({
-      url: '/pages/friends/show/index?user_id=' + friend_user_id,
+      url: '/pages/friends/show/index?friend_id=' + friend_id,
     })
   },
 
