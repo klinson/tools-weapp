@@ -44,7 +44,7 @@ Page({
 
   bindToChatRoom: function() {
     wx.navigateTo({
-      url: '/pages/chat_rooms/show/index?friend_id=' + this.options.friend_id,
+      url: '/pages/chat_rooms/show/index?friend_id=' + this.data.friend.id,
     })
   }
 
