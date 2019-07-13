@@ -3,7 +3,11 @@
   <view slot="content">{{title}}</view>
 </cu-custom>
 
-<view class="cu-chat padding-bottom-xl" >
+<view class="cu-chat padding-bottom-xl">
+  <view class="cu-info" wx:if='{{no_more == false}}'>
+    <text class="cuIcon-unfold text-blue"></text>
+    <text class="text-blue" bindtap="bindGetHistory"> 点击加载更多</text>
+  </view>
   <block wx:for="{{list}}" wx:key>
     <block wx:if="{{item.withdraw_at}}">
       <view wx:if="{{item.from_user_id != me.id}}" class="cu-info round">对方撤回一条消息!</view>
@@ -28,6 +32,7 @@
       </view>
     </block>
   </block>
+  <view style='height: 2.5rem' id='bottom-view'></view>
 </view>
 
 <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">

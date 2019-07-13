@@ -1,7 +1,7 @@
 const notice = require('./notice.js');
 var server = '';
 server = 'https://tools.klinson.com';
-// server = 'http://192.168.66.3';
+// server = 'http://192.168.66.2';
 
 //GET请求
 function GET(requestHandler) {
