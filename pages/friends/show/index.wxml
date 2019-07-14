@@ -2,7 +2,10 @@
   <view slot="backText">返回</view>
   <view slot="content">用户信息</view>
 </cu-custom>
-
+<view class="bg-olive notice" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
 <view class="grid col-1 bg-white shadow">
   <view>
     <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff" bindtap='ViewImage'>

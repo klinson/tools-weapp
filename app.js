@@ -4,6 +4,7 @@ const utils = require('/utils/util.js');
 const cache = require('/utils/cache.js');
 const notice = require('/utils/notice.js');
 const api = require('/utils/api.js');
+const ws = require('/utils/websocket.js');
 wx.cloud.init({
   env: 'random-78lbw'
 })
@@ -13,6 +14,7 @@ App({
   notice,
   utils,
   api,
+  ws,
   onLaunch: function () {
     let that = this;
     this.checkEnv()
@@ -21,6 +23,7 @@ App({
     let user = wx.getStorageSync('user_info');
     if (user && wx.getStorageSync('login_token')) {
       this.globalData.userInfo = user;
+      ws.start();
       that.startRecordLocation();
     } else {
       wx.login({

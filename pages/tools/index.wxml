@@ -1,6 +1,10 @@
 <cu-custom bgColor="{{topNavBar.bgColor}}">
   <view slot="content">小工具</view>
 </cu-custom>
+<view class="bg-olive notice" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
 <block wx:for="{{list}}" wx:key="id">
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">

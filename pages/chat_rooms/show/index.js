@@ -68,6 +68,7 @@ Page({
       success: function (res) {
         that.setData({
           room: res.data,
+          room_id: res.data.id,
           title: res.data.title ? res.data.title : res.data.toUser.nickname
         }, () => {
           that.getMessages(that.toBottom)
@@ -96,7 +97,9 @@ Page({
           });
           callback && callback()
         } else {
-          app.notice.showToast('失败', '没有更多消息')
+          if (! callback) {
+            app.notice.showToast('没有更多消息', 'fail')
+          }
           that.setData({
             no_more: true,
           });
@@ -121,14 +124,25 @@ Page({
         include: 'fromUser'
       },
       success: function (res) {
-        let list = that.data.list;
-        list.push(res.data)
-        that.setData({
-          list: list,
-          message_content: '',
+        that.setData({ message_content: ''});
+        that.addMessageToList(res.data);
+
+        // websocket发送
+        app.ws.send({
+          api: 'chat_message',
+          data: res.data
         });
       }
     });
+  },
+
+  // 添加消息到聊天列表
+  addMessageToList: function(messageObject) {
+    let list = this.data.list;
+    list.push(messageObject)
+    this.setData({
+      list: list,
+    }, this.toBottom);
   },
 
   back: function() {

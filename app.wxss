@@ -8,3 +8,14 @@
 .a_color {
   color: #6CA6CD
 }
+
+.notice {
+  line-height: 3em;
+  padding: 0 20rpx;
+  width: 100%;
+  z-index: 99999;
+}
+
+.notice text {
+  margin-right: 6rpx;
+}

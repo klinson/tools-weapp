@@ -2,6 +2,10 @@
   <view slot="backText">返回</view>
   <view slot="content">个人信息</view>
 </cu-custom>
+<view class="bg-olive notice" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
 <form>
   <view class="cu-form-group margin-top">
     <view class="title">姓名</view>

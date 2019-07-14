@@ -1,6 +1,10 @@
 <cu-custom bgColor="{{topNavBar.bgColor}}">
   <view slot="content">配对</view>
 </cu-custom>
+<view class="bg-olive notice" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
 
 <view class="cu-bar tabbar bg-white shadow foot">
   <view wx:for="{{bottomNavBars}}" wx:for-index="index" wx:for-item='bottomNavBar' wx:key='{{bottomNavBar.key}}' class="action" bindtap="NavChange" data-path='{{bottomNavBar.path}}'>

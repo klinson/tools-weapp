@@ -2,7 +2,10 @@
   <view slot="backText">返回</view>
   <view slot="content">匹配列表</view>
 </cu-custom>
-
+<view class="bg-olive notice" style="position:fixed; top:{{CustomBar}}px;" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
   <view class="search-form round">
     <text class="cuIcon-search"></text>

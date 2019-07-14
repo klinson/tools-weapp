@@ -2,7 +2,10 @@
   <view slot="backText">返回</view>
   <view slot="content">我的论坛帖子</view>
 </cu-custom>
-
+<view class="bg-olive notice" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
 <view class="cu-bar search bg-white">
   <view class="search-form round">
     <text class="cuIcon-search"></text>
