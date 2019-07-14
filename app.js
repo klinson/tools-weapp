@@ -17,13 +17,18 @@ App({
   ws,
   onLaunch: function () {
     let that = this;
-    this.checkEnv()
+    this.checkEnv();
+
+    wx.onAppShow(function(res) {
+      console.log('websocket状态：', ws.status())
+      ws.connect();
+    });
 
     // 登录
     let user = wx.getStorageSync('user_info');
     if (user && wx.getStorageSync('login_token')) {
       this.globalData.userInfo = user;
-      ws.start();
+      ws.connect();
       that.startRecordLocation();
     } else {
       wx.login({

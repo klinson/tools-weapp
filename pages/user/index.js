@@ -12,7 +12,8 @@ Page({
 
     is_login: false,
     user_info: null,
-    env: app.globalData.env
+    env: app.globalData.env,
+    websocket: false,
   },
 
   NavChange(e) {
@@ -30,6 +31,30 @@ Page({
 
   onShow() {
     this.updateLoginInfo();
+    this.setData({
+      websocket: app.ws.status()
+    });
+  },
+
+  bindReconnectWs() {
+    if (app.ws.status && app.ws.status() != this.data.websocket) {
+      app.notice.showToast('连接成功', 'success')
+      this.setData({
+        websocket: app.ws.status()
+      });
+      return ;
+    }
+    let that = this;
+    app.ws.connect({
+      complete: function () {
+       let status = app.ws.status();
+        app.notice.showToast(status ? '连接成功' : '连接失败', status ? 'success' : 'fail')
+        that.setData({
+          websocket: status
+        });
+      }
+    });
+    
   },
 
   updateLoginInfo() {

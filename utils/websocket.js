@@ -8,11 +8,12 @@ server = 'ws://tools.klinson.com:10901';
 
 // websocket 服务
 var ws = null;
-var socketOpen = false;
+var status = false;
 
 //  连接成功
 wx.onSocketOpen((res) => {
   console.log('WebSocket 成功连接')
+  status = true;
   // that.resMes()
   //  开始心跳
   // that.startHeartBeat()
@@ -20,14 +21,16 @@ wx.onSocketOpen((res) => {
 //连接失败
 wx.onSocketError((err) => {
   console.log('websocket连接失败', err);
+  status = false;
 
   // 重新启动
-  // start();
+  // connect();
 });
 wx.onSocketClose((res) => {
   console.log('websocket连接关闭', res);
+  status = false;
 
-  // start();
+  // connect();
 });
 
 wx.onSocketMessage((res) => {
@@ -82,32 +85,44 @@ function revMessage (res) {
 }
 
 
-function start() {
+function connect(object = {}) {
+  if (status) {
+    console.log('不要重复连接啦！！！')
+    return ;
+  }
   let sessionId = wx.getStorageSync('login_token');
   ws = wx.connectSocket({
     url: server + '?_token=' + sessionId,
     success: (res) => {
-      socketOpen = true;
       console.log(res);
+      status = true;
+      object.success && object.success();
     },
     fail: (err) => {
       console.log(res);
+      object.fail && object.fail();
     },
     complete: (res) => {
       console.log(res);
+      object.complete && object.complete();
     }
   });
 }
 
 function send(content) {
-  if (socketOpen) {
+  if (status) {
     wx.sendSocketMessage({
       data: JSON.stringify(content)
     })
   }
 }
 
+function getStatus() {
+  return status
+}
+
 module.exports = {
-  start: start,
+  connect: connect,
   send: send,
+  status: getStatus,
 }

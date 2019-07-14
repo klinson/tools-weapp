@@ -51,6 +51,16 @@
           <text class="text-grey">我的论坛帖子</text>
         </navigator>
       </view>
+      <view class="cu-item arrow" bindtap='bindReconnectWs'>
+        <view class="content">
+          <text class="cuIcon-radioboxfill text-blue"></text>
+          <text class="text-grey">通信状态</text>
+        </view>
+        <view class="action">
+          <view class="cu-tag round bg-green" wx:if='{{websocket}}'>正常</view>
+          <view class="cu-tag round bg-yellow" wx:else>断开</view>
+        </view>
+      </view>
     </block>
   </block>
   <view class="cu-item arrow">
