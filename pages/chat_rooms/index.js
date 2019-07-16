@@ -1,18 +1,36 @@
-// pages/chat_rooms/index.js
+const app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    topNavBar: app.globalData.topNavBar,
 
+    search: '',
+    list: [],
+  },
+
+  getList: function () {
+    let that = this;
+    app.https.GET({
+      url: '/api/chatRooms',
+      params: {
+        include: 'toUser',
+        q: that.data.search,
+      },
+      success: function (res) {
+        that.setData({
+          list: res.data.data,
+        });
+      }
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getList();
   },
 
   /**

@@ -1,2 +1,26 @@
-<!--pages/chat_rooms/index.wxml-->
-<text>pages/chat_rooms/index.wxml</text>
+<cu-custom bgColor="{{topNavBar.bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">聊天列表</view>
+</cu-custom>
+<view class="bg-olive notice" wx:if='{{_notice}}'>
+  <text class="cuIcon-notification"></text>
+  <text class="text-cut">{{_notice}}</text>
+</view>
+
+<view class="cu-list menu-avatar">
+  <view class="cu-item solids-bottom" wx:for='{{list}}' wx:key>
+    <view class="cu-avatar radius lg" style="background-image:url({{item.toUser.avatar}});"></view>
+    <view class="content">
+      <view class="text-pink">
+        <text class="text-cut">{{item.toUser.nickname}}</text>
+      </view>
+      <view class="text-gray text-sm flex">
+        <text class="text-cut">{{item.toUser.signature}}</text>
+      </view>
+    </view>
+    <view class="action">
+      <view class="text-grey text-xs">22:20</view>
+      <view class="cu-tag round bg-red sm">5</view>
+    </view>
+  </view>
+</view>
